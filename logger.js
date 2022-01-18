@@ -2,6 +2,9 @@
  * Created by FishingHacks
  * https://github.com/FishingHacks/LoggingLibrary
  */
+
+const { inspect } = require("util");
+
 class ArrayList extends Array {
   constructor() {
     super();
@@ -191,13 +194,13 @@ class Logger {
 
   error(msg, ui = "", ...objects) {
     let inspectedObjects = [];
-    objects.forEach((el) => inspectedObjects.push(xinspect(el)));
+    objects.forEach((el) => inspectedObjects.push(inspect(el)));
     this.log(msg, ui + " " + inspectedObjects.join(" "), console.error);
   }
 
   warn(msg, ui, ...objects) {
     let inspectedObjects = [];
-    objects.forEach((el) => inspectedObjects.push(xinspect(el)));
+    objects.forEach((el) => inspectedObjects.push(inspect(el)));
     this.log(msg, ui + " " + inspectedObjects.join(" "), console.warn);
   }
 }
