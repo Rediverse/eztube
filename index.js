@@ -116,7 +116,7 @@ const eztubeStatic = {
 (async function () {
   console.log(
     await new client()
-      .setToken("AIzaSyBiOOBwM3Cv90DRN4VAqwxP91H65oe7PGw")
+      .setToken(require("./key"))
       .getVideo("PYW4AIMEvsU").items
   );
 })();
