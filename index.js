@@ -129,7 +129,7 @@ class client {
   }
 
   async getChannelDetails(id, maxResults = 1) {
-    let url = new URL(ENDPOINTS.Video_info);
+    let url = new URL(ENDPOINTS.Channel_info);
     url.searchParams.set("part", "snippet");
     if (typeof id == typeof "") {
       url.searchParams.set("forUsername", id);
@@ -141,7 +141,7 @@ class client {
     return res.items;
   }
   async getChannelStatus(id, maxResults = 1) {
-    let url = new URL(ENDPOINTS.Video_info);
+    let url = new URL(ENDPOINTS.Channel_info);
     url.searchParams.set("part", "status");
     if (typeof id == typeof "") {
       url.searchParams.set("forUsername", id);
@@ -154,7 +154,7 @@ class client {
   }
 
   async getChannelLocalizations(id, maxResults = 1) {
-    let url = new URL(ENDPOINTS.Video_info);
+    let url = new URL(ENDPOINTS.Channel_info);
     url.searchParams.set("part", "localizations");
     if (typeof id == typeof "") {
       url.searchParams.set("forUsername", id);
@@ -167,7 +167,7 @@ class client {
   }
 
   async getChannelStats(id, maxResults = 1) {
-    let url = new URL(ENDPOINTS.Video_info);
+    let url = new URL(ENDPOINTS.Channel_info);
     url.searchParams.set("part", "statistics");
     if (typeof id == typeof "") {
       url.searchParams.set("forUsername", id);
@@ -180,7 +180,7 @@ class client {
   }
 
   async getChannelBranding(id, maxResults = 1) {
-    let url = new URL(ENDPOINTS.Video_info);
+    let url = new URL(ENDPOINTS.Channel_info);
     url.searchParams.set("part", "brandingSettings");
     if (typeof id == typeof "") {
       url.searchParams.set("forUsername", id);
