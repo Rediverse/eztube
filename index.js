@@ -127,7 +127,73 @@ class client {
     let res = await this.getAPI(url.href);
     return res.items[0]?.player.embedHtml;
   }
+
+  async getChannelDetails(id, maxResults = 1) {
+    let url = new URL(ENDPOINTS.Video_info);
+    url.searchParams.set("part", "snippet");
+    if (typeof id == typeof "") {
+      url.searchParams.set("forUsername", id);
+    } else {
+      url.searchParams.set("id", id);
+    }
+    url.searchParams.set("maxResults", maxResults);
+    let res = await this.getAPI(url.href);
+    return res.items;
+  }
+  async getChannelStatus(id, maxResults = 1) {
+    let url = new URL(ENDPOINTS.Video_info);
+    url.searchParams.set("part", "status");
+    if (typeof id == typeof "") {
+      url.searchParams.set("forUsername", id);
+    } else {
+      url.searchParams.set("id", id);
+    }
+    url.searchParams.set("maxResults", maxResults);
+    let res = await this.getAPI(url.href);
+    return res.items;
+  }
+
+  async getChannelLocalizations(id, maxResults = 1) {
+    let url = new URL(ENDPOINTS.Video_info);
+    url.searchParams.set("part", "localizations");
+    if (typeof id == typeof "") {
+      url.searchParams.set("forUsername", id);
+    } else {
+      url.searchParams.set("id", id);
+    }
+    url.searchParams.set("maxResults", maxResults);
+    let res = await this.getAPI(url.href);
+    return res.items;
+  }
+
+  async getChannelStats(id, maxResults = 1) {
+    let url = new URL(ENDPOINTS.Video_info);
+    url.searchParams.set("part", "statistics");
+    if (typeof id == typeof "") {
+      url.searchParams.set("forUsername", id);
+    } else {
+      url.searchParams.set("id", id);
+    }
+    url.searchParams.set("maxResults", maxResults);
+    let res = await this.getAPI(url.href);
+    return res.items;
+  }
+
+  async getChannelBranding(id, maxResults = 1) {
+    let url = new URL(ENDPOINTS.Video_info);
+    url.searchParams.set("part", "brandingSettings");
+    if (typeof id == typeof "") {
+      url.searchParams.set("forUsername", id);
+    } else {
+      url.searchParams.set("id", id);
+    }
+    url.searchParams.set("maxResults", maxResults);
+    let res = await this.getAPI(url.href);
+    return res.items;
+  }
 }
+
+
 
 const eztubeStatic = {
   utils: { xinspect, forEach, validateObject, ArrayList },
