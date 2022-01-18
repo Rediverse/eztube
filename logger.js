@@ -2,12 +2,12 @@
  * Created by FishingHacks
  * https://github.com/FishingHacks/LoggingLibrary
  */
-class ArrayList<T> extends Array<T> {
+export class ArrayList extends Array {
   constructor() {
     super();
   }
 
-  append(el: T) {
+  append(el) {
     this.push(el);
   }
   clear() {
@@ -15,22 +15,22 @@ class ArrayList<T> extends Array<T> {
       this.shift();
     }
   }
-  add(arr: Array<T>|ArrayList<T>) {
+  add(arr) {
     while (arr.length > 0) {
       this.push(arr.shift());
     }
   }
-  remove(el: T) {
+  remove(el) {
     let newArr = this.filter((_el) => el != _el);
     this.clear();
     this.add(newArr);
   }
-  removeAt(i: number) {
+  removeAt(i) {
     let newArr = this.filter((el, _i) => i != _i);
     this.clear();
     this.add(newArr);
   }
-  search(query: (el: T, i: number, list: ArrayList<T>)=>boolean) {
+  search(query) {
     let arr = [];
     this.forEach((item, i) => {
       if (query(item, i, this)) arr.push(item);
@@ -38,8 +38,8 @@ class ArrayList<T> extends Array<T> {
 
     return arr;
   }
-  filter_(func: (el: T, i: number, arr: ArrayList<T>) => T): ArrayList<T> {
-    let newArr = new ArrayList<T>();
+  filter_(func) {
+    let newArr = new ArrayList();
     this.forEach((el, i) => {
       newArr.push(func(el, i, this));
     });
@@ -47,7 +47,7 @@ class ArrayList<T> extends Array<T> {
   }
 
   random(count=1) {
-      let items: ArrayList<T> = new ArrayList<T>();
+      let items = new ArrayList();
       for (let i = 0; i < count; i++) {
         items.push(this[Math.floor(Math.random() * this.length)]);
     }
@@ -66,20 +66,20 @@ let logFunctions = {
   info: (proc, lvl) => `[${proc}/${lvl}]`,
 };
 
-function forEach<T>(obj: T, func: (el: any, i: number, obj: T) => void) {
+export function forEach(obj, func) {
   for (let el in obj) {
-    func(obj[Number(el)], Number(el), obj);
+    func(obj[el], el, obj);
   }
 }
 
-function parseForLog(str: string): string {
+export function parseForLog(str) {
   let maxIter = 30;
   let iter = 0;
   let _iter = 0;
-  let strarr = new ArrayList<string>();
+  let strarr = new ArrayList();
   let getFuncName = false;
   let funcname = "";
-  let addarr: ArrayList<string> = new ArrayList<string>();
+  let addarr = new ArrayList();
   forEach(str, (el) => strarr.append(el));
   strarr = strarr.filter_((el, i) => {
     if (!getFuncName) {
@@ -91,7 +91,7 @@ function parseForLog(str: string): string {
         }
       }
     } else if (el == "}") {
-      let _getFuncName: string = "";
+      let _getFuncName = "";
       funcname = funcname.substring(1);
       if (funcname == "") return "";
       if (!funcname.match(/^[A-Za-z_-]+\(["a-zA-Z0-9., ']*\)$/)) {
@@ -138,7 +138,7 @@ function parseForLog(str: string): string {
   return strarr.join("");
 }
 
-function xinspect(object: object, prefix = "") {
+export function xinspect(object, prefix = "") {
   if (typeof object == "undefined" || object == null) {
     return "null";
   }
@@ -164,33 +164,31 @@ function xinspect(object: object, prefix = "") {
   return r;
 }
 
-class Logger {
-  private _n: string;
-
-  constructor(name: string) {
-    this._n = name;
+export class Logger {
+  constructor(name) {
+    this.#n = name;
   }
 
   get prefix() {
-    return this._n;
+    return this.#n;
   }
   set prefix(value) {
-    this._n = value;
+    this.#n = value;
   }
 
-  setPrefix(value: string) {
+  setPrefix(value) {
     this.prefix = value;
     return this.prefix;
   }
 
-  getPrefix(): string {
+  getPrefix() {
     return this.prefix;
   }
 
   log(
-    message: string | Message,
+    message,
     userinput = "",
-    func: (...v: any[]) => void = console.log
+    func = console.log
   ) {
     if (message instanceof Message) {
       if (typeof message["getUnsafeMessage"] == "function") {
@@ -200,29 +198,29 @@ class Logger {
         message = parseForLog(message.getMessage());
       }
     } else {
-      message = parseForLog("[ " + this.prefix + "] " + message);
+      message = parseForLog("[" + this.prefix + "] " + message);
     }
     func(message + userinput);
   }
 
-  error(msg: string | Message, ui = "", ...objects) {
+  error(msg, ui = "", ...objects) {
     let inspectedObjects = [];
     objects.forEach((el) => inspectedObjects.push(xinspect(el)));
     this.log(msg, ui + " " + inspectedObjects.join(" "), console.error);
   }
 
-  warn(msg: string | Message, ui = "", ...objects) {
+  warn(msg, ui = "", ...objects) {
     let inspectedObjects = [];
     objects.forEach((el) => inspectedObjects.push(xinspect(el)));
     this.log(msg, ui + " " + inspectedObjects.join(" "), console.warn);
   }
 }
 
-function getLogger(pref: string): Logger {
+export function getLogger(pref) {
   return new Logger(pref);
 }
 
-function addLogFunction(name: string, func: (...args) => string) {
+export function addLogFunction(name, func) {
   if (typeof name == typeof "string" && typeof func == typeof (() => {})) {
     if (name.match(/["'(),.]/)) {
       return "Function name contains bad characters";
@@ -230,38 +228,25 @@ function addLogFunction(name: string, func: (...args) => string) {
     logFunctions[name] = func;
     return "success!";
   }
-  return "The name isn't a string or the function isn't a function";
+  return "The name isn't a string or the Function isn't a function";
 }
 
-function getMessageObject(msg: string, ui: string = "") {
+export function getMessageObject(msg, ui = "") {
   return new Message(msg, ui);
 }
 
-class Message {
-  private ui: string;
-  private message: string;
+export class Message {
 
-  constructor(message: string, usermessage: string) {
-    this.message = message;
-    this.ui = usermessage;
+  constructor(message, usermessage) {
+    this.#message = message;
+    this.#ui = usermessage;
   }
 
-  getMessage(): string {
-    return this.message;
+  getMessage() {
+    return this.#message;
   }
 
-  getUnsafeMessage(): string {
-    return this.ui;
+  getUnsafeMessage() {
+    return this.#ui;
   }
-}
-
-export default class logger {
-  Message = Message;
-  logFunction = logFunctions;
-  addLogFunction: (name: string, func: (...args) => string) => void =
-    addLogFunction;
-  getMessageObject: (msg: string, ui?) => Message = getMessageObject;
-  Logger = Logger;
-  getLogger: (pref: string) => Logger = getLogger;
-  ArrayList = ArrayList;
 }
