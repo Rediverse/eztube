@@ -2,7 +2,7 @@
  * Created by FishingHacks
  * https://github.com/FishingHacks/LoggingLibrary
  */
-export class ArrayList extends Array {
+class ArrayList extends Array {
   constructor() {
     super();
   }
@@ -41,15 +41,16 @@ export class ArrayList extends Array {
   filter_(func) {
     let newArr = new ArrayList();
     this.forEach((el, i) => {
-      newArr.push(func(el, i, this));
+      let ret = func(el, i, this);
+      newArr.push(ret);
     });
     return newArr;
   }
 
-  random(count=1) {
-      let items = new ArrayList();
-      for (let i = 0; i < count; i++) {
-        items.push(this[Math.floor(Math.random() * this.length)]);
+  random(count = 1) {
+    let items = new ArrayList();
+    for (let i = 0; i < count; i++) {
+      items.push(this[Math.floor(Math.random() * this.length)]);
     }
     this.add(items);
   }
@@ -66,20 +67,20 @@ let logFunctions = {
   info: (proc, lvl) => `[${proc}/${lvl}]`,
 };
 
-export function forEach(obj, func) {
-  for (let el in obj) {
-    func(obj[el], el, obj);
+function forEach(obj, func) {
+  for (el in obj) {
+    func(obj[el], el);
   }
 }
 
-export function parseForLog(str) {
+function parseForLog(str) {
   let maxIter = 30;
   let iter = 0;
   let _iter = 0;
   let strarr = new ArrayList();
   let getFuncName = false;
   let funcname = "";
-  let addarr = new ArrayList();
+  addarr = [];
   forEach(str, (el) => strarr.append(el));
   strarr = strarr.filter_((el, i) => {
     if (!getFuncName) {
@@ -91,7 +92,7 @@ export function parseForLog(str) {
         }
       }
     } else if (el == "}") {
-      let _getFuncName = "";
+      getFuncName = "";
       funcname = funcname.substring(1);
       if (funcname == "") return "";
       if (!funcname.match(/^[A-Za-z_-]+\(["a-zA-Z0-9., ']*\)$/)) {
@@ -138,7 +139,7 @@ export function parseForLog(str) {
   return strarr.join("");
 }
 
-export function xinspect(object, prefix = "") {
+function xinspect(object, prefix) {
   if (typeof object == "undefined" || object == null) {
     return "null";
   }
@@ -154,7 +155,8 @@ export function xinspect(object, prefix = "") {
     var tempDescription = prefix + '"' + property + '"';
     tempDescription += ": ";
     if (datatype == "object")
-      tempDescription += "object: " + xinspect(object[property], prefix + "  ");
+      tempDescription +=
+        "object: " + xinspect(for_console, object[property], prefix + "  ");
     else tempDescription += object[property];
 
     rows.push(tempDescription);
@@ -164,33 +166,17 @@ export function xinspect(object, prefix = "") {
   return r;
 }
 
-export class Logger {
+class Logger {
   constructor(name) {
-    this.#n = name;
+    this._n = name;
   }
 
-  get prefix() {
-    return this.#n;
-  }
-  set prefix(value) {
-    this.#n = value;
+  get name() {
+    return this._n;
   }
 
-  setPrefix(value) {
-    this.prefix = value;
-    return this.prefix;
-  }
-
-  getPrefix() {
-    return this.prefix;
-  }
-
-  log(
-    message,
-    userinput = "",
-    func = console.log
-  ) {
-    if (message instanceof Message) {
+  log(message, userinput = "", func = console.log) {
+    if (typeof message == "object") {
       if (typeof message["getUnsafeMessage"] == "function") {
         userinput = message.getUnsafeMessage();
       }
@@ -198,7 +184,7 @@ export class Logger {
         message = parseForLog(message.getMessage());
       }
     } else {
-      message = parseForLog("[" + this.prefix + "] " + message);
+      message = parseForLog(this.name + " " + message);
     }
     func(message + userinput);
   }
@@ -209,18 +195,18 @@ export class Logger {
     this.log(msg, ui + " " + inspectedObjects.join(" "), console.error);
   }
 
-  warn(msg, ui = "", ...objects) {
+  warn(msg, ui, ...objects) {
     let inspectedObjects = [];
     objects.forEach((el) => inspectedObjects.push(xinspect(el)));
     this.log(msg, ui + " " + inspectedObjects.join(" "), console.warn);
   }
 }
 
-export function getLogger(pref) {
+function getLogger(pref) {
   return new Logger(pref);
 }
 
-export function addLogFunction(name, func) {
+function addLogFunction(name, func) {
   if (typeof name == typeof "string" && typeof func == typeof (() => {})) {
     if (name.match(/["'(),.]/)) {
       return "Function name contains bad characters";
@@ -228,25 +214,36 @@ export function addLogFunction(name, func) {
     logFunctions[name] = func;
     return "success!";
   }
-  return "The name isn't a string or the Function isn't a function";
+  return "The name isn't a string or the function isn't a function";
 }
 
-export function getMessageObject(msg, ui = "") {
+function getMessageObject(msg, ui) {
   return new Message(msg, ui);
 }
 
-export class Message {
-
+class Message {
   constructor(message, usermessage) {
-    this.#message = message;
-    this.#ui = usermessage;
+    this.message = message;
+    this.ui = usermessage;
   }
 
   getMessage() {
-    return this.#message;
+    return this.message;
   }
 
   getUnsafeMessage() {
-    return this.#ui;
+    return this.ui;
   }
+}
+
+if (!globalThis["window"]) {
+  module.exports = {
+    Message,
+    logFunctions,
+    addLogFunction,
+    getMessageObject,
+    Logger,
+    getLogger,
+    ArrayList,
+  };
 }

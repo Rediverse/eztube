@@ -9,20 +9,25 @@ const {
   ArrayList,
 } = require("./logger");
 
-import axios from "axios";
+const axios = require("axios")
 
-const logger = new Logger("(${date})[EZ-Tube]");
+const logger = new Logger("(${date}) [EZTube]");
 
-class APIKeyMissingException {
+class APIKeyMissingException extends Error {
+  #d = "";
+
   constructor() {
+    super();
     this.#d = new Date().toUTCString();
-  }
-  get message() {
-    return `(${this.#d})[EZ-Tube] No API-Key defined`;
+    this.message = `(${new Date().toUTCString()})[EZ-Tube] No API-Key defined`;
   }
 }
 
 class APIError {
+  #msg = "";
+  #status = 200;
+  #d = "";
+
   constructor(message, status) {
     this.#msg = message;
     this.#status = status;
@@ -30,13 +35,14 @@ class APIError {
   }
 
   get message() {
-    return `(${this.#d})[EZ-Tube] API Error: ${this.#msg} (Status ${
-      this.#status
-    })`;
+    return `(${this.#d})[EZ-Tube] API Error: ${this.#msg} (Status ${this.#status.toString()})`;
   }
 }
 
 class client {
+
+  #token = "";
+
   constructor(key = undefined) {
     this.#token = key;
   }
@@ -54,7 +60,10 @@ const eztubeStatic = {
   client: (key = undefined) => new client(key),
 };
 
-logger.error("[${info(Client, Error)}] ", "API Key is not defined");
+logger.error(
+  "${info(api, error)} ",
+  "API Key is not defined"
+);
 throw new APIKeyMissingException();
 
 module.exports = eztubeStatic;

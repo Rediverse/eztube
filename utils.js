@@ -2,9 +2,9 @@
  * Created by FishingHacks
  * https://github.com/FishingHacks/utils
  */
-import { ArrayList } from "./logger";
+const { ArrayList } = require("./logger");
 
-export function xinspect(object, prefix="") {
+function xinspect(object, prefix="") {
   if (typeof object == "undefined" || object == null) {
     return "null";
   }
@@ -31,7 +31,7 @@ export function xinspect(object, prefix="") {
   return r;
 }
 
-export function forEach(obj, func) {
+function forEach(obj, func) {
   let i = 0;
   for (let el in obj) {
     func(obj[el], Number(el), obj);
@@ -39,7 +39,7 @@ export function forEach(obj, func) {
   }
 }
 
-export function validateObject(obj, template) {
+function validateObject(obj, template) {
   let _templ = new ArrayList();
   let _obj = new ArrayList();
   for (let prop in template) {
@@ -86,4 +86,11 @@ export function validateObject(obj, template) {
     }
   });
   return !neq;
+}
+
+module.exports = {
+  forEach,
+  validateObject,
+  xinspect,
+  ArrayList
 }
