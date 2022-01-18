@@ -4,6 +4,14 @@
  */
 const { ArrayList } = require("./logger");
 
+/**
+ * 
+ * @param {any} object 
+ * @param {string} prefix 
+ * @returns {string}
+ * 
+ * Inspect the passed object
+ */
 function xinspect(object, prefix="") {
   if (typeof object == "undefined" || object == null) {
     return "null";
@@ -31,6 +39,14 @@ function xinspect(object, prefix="") {
   return r;
 }
 
+
+/**
+ * 
+ * @param {any} obj 
+ * @param {(el: any, i: number, obj: any)=>void} func 
+ * 
+ * Loops over the object
+ */
 function forEach(obj, func) {
   let i = 0;
   for (let el in obj) {
@@ -39,6 +55,16 @@ function forEach(obj, func) {
   }
 }
 
+
+/**
+ * 
+ * @param {any} obj 
+ * @param {any} template 
+ * @returns boolean
+ * 
+ * Checkes if the objects structure is the same as the of the passed template
+ * Values doesn't matter
+ */
 function validateObject(obj, template) {
   let _templ = new ArrayList();
   let _obj = new ArrayList();

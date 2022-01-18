@@ -34,7 +34,7 @@ class ArrayList extends Array {
     this.add(newArr);
   }
   search(query) {
-    let arr = [];
+    let arr = new ArrayList();
     this.forEach((item, i) => {
       if (query(item, i, this)) arr.push(item);
     });
@@ -192,13 +192,13 @@ class Logger {
     func(message + userinput);
   }
 
-  error(msg, ui = "", ...objects) {
+  error(msg, ui = "", ...objects = {}) {
     let inspectedObjects = [];
     objects.forEach((el) => inspectedObjects.push(inspect(el)));
     this.log(msg, ui + " " + inspectedObjects.join(" "), console.error);
   }
 
-  warn(msg, ui, ...objects) {
+  warn(msg, ui = "", ...objects = {}) {
     let inspectedObjects = [];
     objects.forEach((el) => inspectedObjects.push(inspect(el)));
     this.log(msg, ui + " " + inspectedObjects.join(" "), console.warn);

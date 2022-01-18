@@ -17,6 +17,9 @@ const logger = new Logger("(${date}) [EZTube]");
 
 const { inspect } = require("util");
 
+/**
+ * The Error when you don't specify your api-key
+ */
 class APIKeyMissingException extends Error {
   #d = "";
 
@@ -27,17 +30,32 @@ class APIKeyMissingException extends Error {
   }
 }
 
+/**
+ * Any Exception in calling the API will result in this Error
+ */
 class APIError {
   #msg = "";
   #status = 200;
   #d = "";
 
+
+  /**
+   * 
+   * @param {string} message 
+   * @param {number} status 
+   * 
+   * the message shall be the description for the error
+   * the status is the response status, like 404 for Not Found
+   */
   constructor(message, status) {
     this.#msg = message;
     this.#status = status;
     this.#d = new Date().toUTCString();
   }
 
+  /**
+   * @Returns {string}
+  */
   get message() {
     return `(${this.#d})[EZ-Tube] API Error: ${
       this.#msg
@@ -45,13 +63,27 @@ class APIError {
   }
 }
 
+/**
+ * This is the class to call the api
+ */
 class client {
   #token = "";
 
+  /**
+   * @param {string|undefined} key
+   *
+   * You can insert here or later the key. It can always be changed. Trust me, we don't sell your data.
+   */
   constructor(key = undefined) {
     this.#token = key;
   }
 
+  /**
+   *
+   * @param {string} ENDPOINT the enpoint url
+   * @param {object} headers the headers
+   * @returns {object} returns the response object
+   */
   async getAPI(ENDPOINT, headers = {}) {
     if (!this.#token) {
       logger.error("${info(api, error)} ", "API Key is not defined");
@@ -86,21 +118,47 @@ class client {
     return returnValue;
   }
 
+  /**
+   * @returns {string}
+   *
+   * get your current api-key
+   */
   get key() {
     return this.#token;
   }
+
+  /**
+   * @param {string} value Your new API-Key
+   *
+   * set your api-key
+   */
   set key(value) {
     this.#token = value;
   }
-
+  /**
+   * @returns {string}
+   *
+   * get your current api-key
+   */
   getToken() {
     return this.key;
   }
+  /**
+   * @param {string} value Your new API-Key
+   *
+   * set your api-key
+   */
   setToken(value) {
     this.key = value;
     return this;
   }
 
+  /**
+   *
+   * @param {string} id the videoid
+   * @param {number} maxResults the max results
+   * @returns {Array<object>} the array of found videos
+   */
   async getVideoInfos(id, maxResults = 1) {
     let url = new URL(ENDPOINTS.Video_info);
     url.searchParams.set("part", "snippet");
@@ -109,7 +167,12 @@ class client {
     let res = await this.getAPI(url.href);
     return res.items;
   }
-
+  /**
+   *
+   * @param {string} id the videoid
+   * @param {number} maxResults the max results
+   * @returns {Array<object>} the array of found videos
+   */
   async getVideoStatus(id, maxResults = 1) {
     let url = new URL(ENDPOINTS.Video_info);
     url.searchParams.set("part", "status");
@@ -118,7 +181,11 @@ class client {
     let res = await this.getAPI(url.href);
     return res.items;
   }
-
+  /**
+   *
+   * @param {string} id the videoid
+   * @returns {Array<object>} the array of found videos
+   */
   async getPlayerEmbed(id) {
     let url = new URL(ENDPOINTS.Video_info);
     url.searchParams.set("part", "player");
@@ -127,7 +194,13 @@ class client {
     let res = await this.getAPI(url.href);
     return res.items[0]?.player.embedHtml;
   }
-
+  /**
+   *
+   * @param {string} id the channelid
+   * @param {boolean} isChannelName Did you insert the channelname as id?
+   * @param {number} maxResults the max results
+   * @returns {Array<object>} the array of found channels
+   */
   async getChannelDetails(id, isChannelName = false, maxResults = 1) {
     let url = new URL(ENDPOINTS.Channel_info);
     url.searchParams.set("part", "snippet");
@@ -140,6 +213,14 @@ class client {
     let res = await this.getAPI(url.href);
     return res.items;
   }
+
+  /**
+   *
+   * @param {string} id the channelid
+   * @param {boolean} isChannelName Did you insert the channelname as id?
+   * @param {number} maxResults the max results
+   * @returns {Array<object>} the array of found channels
+   */
   async getChannelStatus(id, isChannelName = false, maxResults = 1) {
     let url = new URL(ENDPOINTS.Channel_info);
     url.searchParams.set("part", "status");
@@ -153,6 +234,13 @@ class client {
     return res.items;
   }
 
+  /**
+   *
+   * @param {string} id the channelid
+   * @param {boolean} isChannelName Did you insert the channelname as id?
+   * @param {number} maxResults the max results
+   * @returns {Array<object>} the array of found channels
+   */
   async getChannelLocalizations(id, isChannelName = false, maxResults = 1) {
     let url = new URL(ENDPOINTS.Channel_info);
     url.searchParams.set("part", "localizations");
@@ -166,6 +254,13 @@ class client {
     return res.items;
   }
 
+  /**
+   *
+   * @param {string} id the channelid
+   * @param {boolean} isChannelName Did you insert the channelname as id?
+   * @param {number} maxResults the max results
+   * @returns {Array<object>} the array of found channels
+   */
   async getChannelStats(id, isChannelName = false, maxResults = 1) {
     let url = new URL(ENDPOINTS.Channel_info);
     url.searchParams.set("part", "statistics");
@@ -179,6 +274,13 @@ class client {
     return res.items;
   }
 
+  /**
+   *
+   * @param {string} id the channelid
+   * @param {boolean} isChannelName Did you insert the channelname as id?
+   * @param {number} maxResults the max results
+   * @returns {Array<object>} the array of found channels
+   */
   async getChannelBranding(id, isChannelName = false, maxResults = 1) {
     let url = new URL(ENDPOINTS.Channel_info);
     url.searchParams.set("part", "brandingSettings");
@@ -194,10 +296,11 @@ class client {
 }
 
 
-
 const eztubeStatic = {
   utils: { xinspect, forEach, validateObject, ArrayList },
   client: (key = undefined) => new client(key),
+  APIError,
+  APIKeyMissingException
 };
 
 module.exports = eztubeStatic;
