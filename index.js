@@ -60,6 +60,7 @@ class client {
     let epl = new URL(ENDPOINT);
     epl.searchParams.set("key", this.key);
     let returnValue;
+    console.log(epl.href);
     await axios
       .get(epl.href, { headers: headers })
       .then(({ data }) => {
@@ -100,11 +101,31 @@ class client {
     return this;
   }
 
-  async getVideo(id) {
+  async getVideoInfos(id, maxResults = 1) {
     let url = new URL(ENDPOINTS.Video_info);
     url.searchParams.set("part", "snippet");
     url.searchParams.set("id", id);
-    return await this.getAPI(url.href);
+    url.searchParams.set("maxResults", maxResults);
+    let res = await this.getAPI(url.href);
+    return res.items;
+  }
+
+  async getVideoStatus(id, maxResults = 1) {
+    let url = new URL(ENDPOINTS.Video_info);
+    url.searchParams.set("part", "status");
+    url.searchParams.set("id", id);
+    url.searchParams.set("maxResults", maxResults);
+    let res = await this.getAPI(url.href);
+    return res.items;
+  }
+
+  async getPlayerEmbed(id) {
+    let url = new URL(ENDPOINTS.Video_info);
+    url.searchParams.set("part", "player");
+    url.searchParams.set("id", id);
+    url.searchParams.set("maxResults", 1);
+    let res = await this.getAPI(url.href);
+    return res.items[0]?.player.embedHtml;
   }
 }
 
@@ -112,13 +133,5 @@ const eztubeStatic = {
   utils: { xinspect, forEach, validateObject, ArrayList },
   client: (key = undefined) => new client(key),
 };
-
-(async function () {
-  console.log(
-    await new client()
-      .setToken(require("./key"))
-      .getVideo("PYW4AIMEvsU").items
-  );
-})();
 
 module.exports = eztubeStatic;
