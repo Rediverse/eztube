@@ -128,10 +128,10 @@ class client {
     return res.items[0]?.player.embedHtml;
   }
 
-  async getChannelDetails(id, maxResults = 1) {
+  async getChannelDetails(id, isChannelName = false, maxResults = 1) {
     let url = new URL(ENDPOINTS.Channel_info);
     url.searchParams.set("part", "snippet");
-    if (typeof id == typeof "") {
+    if (isChannelName) {
       url.searchParams.set("forUsername", id);
     } else {
       url.searchParams.set("id", id);
@@ -140,10 +140,10 @@ class client {
     let res = await this.getAPI(url.href);
     return res.items;
   }
-  async getChannelStatus(id, maxResults = 1) {
+  async getChannelStatus(id, isChannelName = false, maxResults = 1) {
     let url = new URL(ENDPOINTS.Channel_info);
     url.searchParams.set("part", "status");
-    if (typeof id == typeof "") {
+    if (isChannelName) {
       url.searchParams.set("forUsername", id);
     } else {
       url.searchParams.set("id", id);
@@ -153,10 +153,10 @@ class client {
     return res.items;
   }
 
-  async getChannelLocalizations(id, maxResults = 1) {
+  async getChannelLocalizations(id, isChannelName = false, maxResults = 1) {
     let url = new URL(ENDPOINTS.Channel_info);
     url.searchParams.set("part", "localizations");
-    if (typeof id == typeof "") {
+    if (isChannelName) {
       url.searchParams.set("forUsername", id);
     } else {
       url.searchParams.set("id", id);
@@ -166,10 +166,10 @@ class client {
     return res.items;
   }
 
-  async getChannelStats(id, maxResults = 1) {
+  async getChannelStats(id, isChannelName = false, maxResults = 1) {
     let url = new URL(ENDPOINTS.Channel_info);
     url.searchParams.set("part", "statistics");
-    if (typeof id == typeof "") {
+    if (isChannelName) {
       url.searchParams.set("forUsername", id);
     } else {
       url.searchParams.set("id", id);
@@ -179,10 +179,10 @@ class client {
     return res.items;
   }
 
-  async getChannelBranding(id, maxResults = 1) {
+  async getChannelBranding(id, isChannelName = false, maxResults = 1) {
     let url = new URL(ENDPOINTS.Channel_info);
     url.searchParams.set("part", "brandingSettings");
-    if (typeof id == typeof "") {
+    if (isChannelName) {
       url.searchParams.set("forUsername", id);
     } else {
       url.searchParams.set("id", id);
