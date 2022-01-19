@@ -294,20 +294,32 @@ class client {
     return res.items;
   }
 
-  async getChannelPage(id, csid="") {
+  /**
+   * @param {string} id the Channel id of which you wanna get the channelpage
+   * @param {string} csid the channelsection-id which you can get by retrieving the id from the item
+   * @returns {object} the object used to describe the channelpage
+   *
+   * Please note: you don't need to give the channelid, when you give the csid. Set then as channelid just undefined or a blank string
+   */
+  async getChannelPage(id, csid = "") {
     let url = new URL(ENDPOINTS.Channel_homepage);
     url.searchParams.set("part", "snippet");
     if (!csid) {
       url.searchParams.set("channelId", id);
-    }
-    else {
+    } else {
       url.searchParams.set("id", csid);
     }
     let res = await this.getAPI(url.href);
     return res.items;
   }
-
-  async getChannelPageContent(id, csid="") {
+  /**
+   * @param {string} id the Channel id of which you wanna get the channelpage
+   * @param {string} csid the channelsection-id which you can get by retrieving the id from the item
+   * @returns {object} the object used to describe the content of the channelpage
+   *
+   * Please note: you don't need to give the channelid, when you give the csid. Set then as channelid just undefined or a blank string
+   */
+  async getChannelPageContent(id, csid = "") {
     let url = new URL(ENDPOINTS.Channel_homepage);
     url.searchParams.set("part", "contentDetails");
     if (!csid) {
