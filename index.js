@@ -293,6 +293,31 @@ class client {
     let res = await this.getAPI(url.href);
     return res.items;
   }
+
+  async getChannelPage(id, csid="") {
+    let url = new URL(ENDPOINTS.Channel_homepage);
+    url.searchParams.set("part", "snippet");
+    if (!csid) {
+      url.searchParams.set("channelid", id);
+    }
+    else {
+      url.searchParams.set("id", csid);
+    }
+    let res = await this.getAPI(url.href);
+    return res.items;
+  }
+
+  async getChannelPageContent(id, csid="") {
+    let url = new URL(ENDPOINTS.Channel_homepage);
+    url.searchParams.set("part", "contentDetails");
+    if (!csid) {
+      url.searchParams.set("channelid", id);
+    } else {
+      url.searchParams.set("id", csid);
+    }
+    let res = await this.getAPI(url.href);
+    return res.items;
+  }
 }
 
 
