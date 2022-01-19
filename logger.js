@@ -192,13 +192,13 @@ class Logger {
     func(message + userinput);
   }
 
-  error(msg, ui = "", ...objects = {}) {
+  error(msg, ui = "", ...objects) {
     let inspectedObjects = [];
     objects.forEach((el) => inspectedObjects.push(inspect(el)));
     this.log(msg, ui + " " + inspectedObjects.join(" "), console.error);
   }
 
-  warn(msg, ui = "", ...objects = {}) {
+  warn(msg, ui = "", ...objects) {
     let inspectedObjects = [];
     objects.forEach((el) => inspectedObjects.push(inspect(el)));
     this.log(msg, ui + " " + inspectedObjects.join(" "), console.warn);

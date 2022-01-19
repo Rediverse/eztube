@@ -4,6 +4,6 @@ const { utils, client } = require("./index");
     let result;
     result = await client()
       .setToken(require("./key"))
-      .getChannelLocalizations("UCMpB9W10RpTKZxTWRTYfrJg");
+      .getChannelPage("UCMpB9W10RpTKZxTWRTYfrJg");
     console.log(result)
 })();

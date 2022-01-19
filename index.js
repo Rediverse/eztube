@@ -298,7 +298,7 @@ class client {
     let url = new URL(ENDPOINTS.Channel_homepage);
     url.searchParams.set("part", "snippet");
     if (!csid) {
-      url.searchParams.set("channelid", id);
+      url.searchParams.set("channelId", id);
     }
     else {
       url.searchParams.set("id", csid);
@@ -311,7 +311,7 @@ class client {
     let url = new URL(ENDPOINTS.Channel_homepage);
     url.searchParams.set("part", "contentDetails");
     if (!csid) {
-      url.searchParams.set("channelid", id);
+      url.searchParams.set("channelId", id);
     } else {
       url.searchParams.set("id", csid);
     }
