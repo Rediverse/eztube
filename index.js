@@ -80,7 +80,7 @@ class client {
 
   /**
    *
-   * @param {string} ENDPOINT the enpoint url
+   * @param {string|URL} ENDPOINT the enpoint url
    * @param {object} headers the headers
    * @returns {object} returns the response object
    */
@@ -89,7 +89,12 @@ class client {
       logger.error("${info(api, error)} ", "API Key is not defined");
       throw new APIKeyMissingException();
     }
-    let epl = new URL(ENDPOINT);
+    if (!ENDPOINT instanceof URL) {
+      let epl = new URL(ENDPOINT);
+    }
+    else {
+      let epl = ENDPOINT;
+    }
     epl.searchParams.set("key", this.key);
     let returnValue;
     console.log(epl.href);
@@ -164,7 +169,7 @@ class client {
     url.searchParams.set("part", "snippet");
     url.searchParams.set("id", id);
     url.searchParams.set("maxResults", maxResults);
-    let res = await this.getAPI(url.href);
+    let res = await this.getAPI(url);
     return res.items;
   }
   /**
@@ -178,7 +183,7 @@ class client {
     url.searchParams.set("part", "status");
     url.searchParams.set("id", id);
     url.searchParams.set("maxResults", maxResults);
-    let res = await this.getAPI(url.href);
+    let res = await this.getAPI(url);
     return res.items;
   }
   /**
@@ -191,7 +196,7 @@ class client {
     url.searchParams.set("part", "player");
     url.searchParams.set("id", id);
     url.searchParams.set("maxResults", 1);
-    let res = await this.getAPI(url.href);
+    let res = await this.getAPI(url);
     return res.items[0]?.player.embedHtml;
   }
   /**
@@ -210,7 +215,7 @@ class client {
       url.searchParams.set("id", id);
     }
     url.searchParams.set("maxResults", maxResults);
-    let res = await this.getAPI(url.href);
+    let res = await this.getAPI(url);
     return res.items;
   }
 
@@ -230,7 +235,7 @@ class client {
       url.searchParams.set("id", id);
     }
     url.searchParams.set("maxResults", maxResults);
-    let res = await this.getAPI(url.href);
+    let res = await this.getAPI(url);
     return res.items;
   }
 
@@ -250,7 +255,7 @@ class client {
       url.searchParams.set("id", id);
     }
     url.searchParams.set("maxResults", maxResults);
-    let res = await this.getAPI(url.href);
+    let res = await this.getAPI(url);
     return res.items;
   }
 
@@ -270,7 +275,7 @@ class client {
       url.searchParams.set("id", id);
     }
     url.searchParams.set("maxResults", maxResults);
-    let res = await this.getAPI(url.href);
+    let res = await this.getAPI(url);
     return res.items;
   }
 
@@ -290,7 +295,7 @@ class client {
       url.searchParams.set("id", id);
     }
     url.searchParams.set("maxResults", maxResults);
-    let res = await this.getAPI(url.href);
+    let res = await this.getAPI(url);
     return res.items;
   }
 
@@ -309,7 +314,7 @@ class client {
     } else {
       url.searchParams.set("id", csid);
     }
-    let res = await this.getAPI(url.href);
+    let res = await this.getAPI(url);
     return res.items;
   }
   /**
@@ -327,7 +332,19 @@ class client {
     } else {
       url.searchParams.set("id", csid);
     }
-    let res = await this.getAPI(url.href);
+    let res = await this.getAPI(url);
+    return res.items;
+  }
+
+  /**
+   * @param {string} videoID the video id of which you wanna get the infos of captions
+   * @return {object} an object that describes the caption
+   */
+  async getCaptionInfos(videoID) {
+    let url = new URL(ENDPOINTS.Caption_infos);
+    url.searchParams.set("part", "snippet");
+    url.searchParams.set("videoId", videoID);
+    let res = await this.getAPI(url);
     return res.items;
   }
 }
