@@ -47,5 +47,3 @@ Thumbnails
 ChannelBanners
 
 Please note that these are just categories. For example, you can get the thumbnail by using the Video API, we don't support "Thumbnails", because "Thumbnails" has only the Endpoint to set, which we won't support, because this API for the time shouldn't require a oauth authorization
-
-![Level Up](https://cdn.discordapp.com/attachments/930538143789224036/933365567509913610/unknown.png)
