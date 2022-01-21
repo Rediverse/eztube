@@ -10,6 +10,8 @@ Videos
 
 Captions (can't list content without oauth)
 
+Search
+
 # To Do
 Activities
 
@@ -28,8 +30,6 @@ Membershiplevels
 PlaylistItems
 
 Playlists
-
-Search
 
 Subscriptions
 

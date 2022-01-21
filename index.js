@@ -38,12 +38,11 @@ class APIError {
   #status = 200;
   #d = "";
 
-
   /**
-   * 
-   * @param {string} message 
-   * @param {number} status 
-   * 
+   *
+   * @param {string} message
+   * @param {number} status
+   *
    * the message shall be the description for the error
    * the status is the response status, like 404 for Not Found
    */
@@ -55,7 +54,7 @@ class APIError {
 
   /**
    * @Returns {string}
-  */
+   */
   get message() {
     return `(${this.#d})[EZ-Tube] API Error: ${
       this.#msg
@@ -89,10 +88,8 @@ class client {
       logger.error("${info(api, error)} ", "API Key is not defined");
       throw new APIKeyMissingException();
     }
-    if (!ENDPOINT instanceof URL) {
-      let epl = new URL(ENDPOINT);
-    }
-    else {
+    let epl = new URL(ENDPOINT);
+    if (ENDPOINT instanceof URL) {
       let epl = ENDPOINT;
     }
     epl.searchParams.set("key", this.key);
@@ -347,14 +344,38 @@ class client {
     let res = await this.getAPI(url);
     return res.items;
   }
+
+  /**
+   *
+   * @param {string} query the search query
+   * @param {import("./types").searchType} type the type of searchresults (video, channel, playlist or undefined)
+   * @param {Number} maxResults the number of results
+   * @returns the searchresults
+   */
+  async search(query, type = undefined, maxResults = 1) {
+    let url = new URL(ENDPOINTS.Search);
+    url.searchParams.set("q", query);
+    if (type) url.searchParams.set("type", type);
+    url.searchParams.set("maxResults", maxResults);
+    let res = await this.getAPI(url);
+    return res.items;
+  }
 }
 
+/**
+ *
+ * @param {string} key the API-Key
+ * @returns {client} a new API-Client
+ */
+function fc(key = undefined) {
+  return new client(key);
+}
 
 const eztubeStatic = {
   utils: { xinspect, forEach, validateObject, ArrayList },
-  client: (key = undefined) => new client(key),
+  client: fc,
   APIError,
-  APIKeyMissingException
+  APIKeyMissingException,
 };
 
 module.exports = eztubeStatic;

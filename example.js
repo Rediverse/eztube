@@ -1,9 +1,9 @@
-const { utils, client } = require("./index");
+const eztube = require("./index");
 
 (async function () {
     let result;
-    result = await client()
+    result = await eztube.client()
       .setToken(require("./key"))
-      .getCaptionInfos("qeMFqkcPYcg");
+      .search("RedCrafter07", "channel", 2);
     console.log(result)
 })();
