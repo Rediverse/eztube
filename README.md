@@ -13,19 +13,9 @@ Captions (can't list content without oauth)
 Search
 
 # To Do
-Activities
-
 Comments
 
 CommentThreads
-
-i18nLanguages
-
-i18nRegions
-
-Members
-
-Membershiplevels
 
 PlaylistItems
 
@@ -36,6 +26,14 @@ Subscriptions
 VideoCategories
 
 # Not doing
+Members
+
+Membershiplevels
+
+i18nLanguages
+
+i18nRegions
+
 Watermarks
 
 GuideCategories (Deprecated)
