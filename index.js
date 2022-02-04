@@ -165,7 +165,7 @@ class client {
     let url = new URL(ENDPOINTS.Video_info);
     url.searchParams.set("part", "snippet");
     url.searchParams.set("id", id);
-    url.searchParams.set("maxResults", maxResults);
+    url.searchParams.set("maxResults", maxResults.toString());
     let res = await this.getAPI(url);
     return res.items;
   }
@@ -179,7 +179,7 @@ class client {
     let url = new URL(ENDPOINTS.Video_info);
     url.searchParams.set("part", "status");
     url.searchParams.set("id", id);
-    url.searchParams.set("maxResults", maxResults);
+    url.searchParams.set("maxResults", maxResults.toString());
     let res = await this.getAPI(url);
     return res.items;
   }
@@ -198,100 +198,105 @@ class client {
   }
   /**
    *
-   * @param {string} id the channelid
-   * @param {boolean} isChannelName Did you insert the channelname as id?
+   * @param {import("./types").channelFilter} channelFilter the channelfilter
    * @param {number} maxResults the max results
    * @returns {Array<object>} the array of found channels
    */
-  async getChannelDetails(id, isChannelName = false, maxResults = 1) {
+  async getChannelDetails(channelFilter = false, maxResults = 1) {
+    if(channelFilter.channelID && channelFilter.channelName) throw new Error("Only channelID or channelName can be specified at the same time")
+    if(!channelFilter.channelName && !channelFilter.channelID) throw new Error("ChannelID or channelName has to be specified")
     let url = new URL(ENDPOINTS.Channel_info);
     url.searchParams.set("part", "snippet");
-    if (isChannelName) {
-      url.searchParams.set("forUsername", id);
+    if (channelFilter.channelName) {
+      url.searchParams.set("forUsername", channelFilter.channelName);
     } else {
-      url.searchParams.set("id", id);
+      url.searchParams.set("id", channelFilter.channelID);
     }
-    url.searchParams.set("maxResults", maxResults);
+    url.searchParams.set("maxResults", maxResults.toString());
     let res = await this.getAPI(url);
     return res.items;
   }
 
   /**
    *
-   * @param {string} id the channelid
-   * @param {boolean} isChannelName Did you insert the channelname as id?
+   * @param {import("./types").channelFilter} channelFilter the channelfilter
    * @param {number} maxResults the max results
    * @returns {Array<object>} the array of found channels
    */
-  async getChannelStatus(id, isChannelName = false, maxResults = 1) {
+  async getChannelStatus(channelFilter = false, maxResults = 1) {
+    if(channelFilter.channelID && channelFilter.channelName) throw new Error("Only channelID or channelName can be specified at the same time")
+    if(!channelFilter.channelName && !channelFilter.channelID) throw new Error("ChannelID or channelName has to be specified")
     let url = new URL(ENDPOINTS.Channel_info);
     url.searchParams.set("part", "status");
-    if (isChannelName) {
-      url.searchParams.set("forUsername", id);
+    if (channelFilter.channelName) {
+      url.searchParams.set("forUsername", channelFilter.channelName);
     } else {
-      url.searchParams.set("id", id);
+      url.searchParams.set("id", channelFilter.channelID);
     }
-    url.searchParams.set("maxResults", maxResults);
+    url.searchParams.set("maxResults", maxResults.toString());
     let res = await this.getAPI(url);
     return res.items;
   }
 
   /**
    *
-   * @param {string} id the channelid
-   * @param {boolean} isChannelName Did you insert the channelname as id?
+   * @param {import("./types").channelFilter} channelFilter the channelfilter
    * @param {number} maxResults the max results
    * @returns {Array<object>} the array of found channels
    */
-  async getChannelLocalizations(id, isChannelName = false, maxResults = 1) {
+  async getChannelLocalizations(channelFilter = false, maxResults = 1) {
+    if(channelFilter.channelID && channelFilter.channelName) throw new Error("Only channelID or channelName can be specified at the same time")
+    if(!channelFilter.channelName && !channelFilter.channelID) throw new Error("ChannelID or channelName has to be specified")
     let url = new URL(ENDPOINTS.Channel_info);
     url.searchParams.set("part", "localizations");
-    if (isChannelName) {
-      url.searchParams.set("forUsername", id);
+    if (channelFilter.channelName) {
+      url.searchParams.set("forUsername", channelFilter.channelName);
     } else {
-      url.searchParams.set("id", id);
+      url.searchParams.set("id", channelFilter.channelID);
     }
-    url.searchParams.set("maxResults", maxResults);
+    url.searchParams.set("maxResults", maxResults.toString());
     let res = await this.getAPI(url);
     return res.items;
   }
 
   /**
    *
-   * @param {string} id the channelid
-   * @param {boolean} isChannelName Did you insert the channelname as id?
+   * @param {import("./types").channelFilter} channelFilter the channelfilter
    * @param {number} maxResults the max results
    * @returns {Array<object>} the array of found channels
    */
-  async getChannelStats(id, isChannelName = false, maxResults = 1) {
+  async getChannelStats(channelFilter = false, maxResults = 1) {
+    if(channelFilter.channelID && channelFilter.channelName) throw new Error("Only channelID or channelName can be specified at the same time")
+    if(!channelFilter.channelName && !channelFilter.channelID) throw new Error("ChannelID or channelName has to be specified")
     let url = new URL(ENDPOINTS.Channel_info);
     url.searchParams.set("part", "statistics");
-    if (isChannelName) {
-      url.searchParams.set("forUsername", id);
+    if (channelFilter.channelName) {
+      url.searchParams.set("forUsername", channelFilter.channelName);
     } else {
-      url.searchParams.set("id", id);
+      url.searchParams.set("id", channelFilter.channelID);
     }
-    url.searchParams.set("maxResults", maxResults);
+    url.searchParams.set("maxResults", maxResults.toString());
     let res = await this.getAPI(url);
     return res.items;
   }
 
   /**
    *
-   * @param {string} id the channelid
-   * @param {boolean} isChannelName Did you insert the channelname as id?
+   * @param {import("./types").channelFilter} channelFilter the channelfilter
    * @param {number} maxResults the max results
    * @returns {Array<object>} the array of found channels
    */
-  async getChannelBranding(id, isChannelName = false, maxResults = 1) {
+  async getChannelBranding(channelFilter, maxResults = 1) {
+    if(channelFilter.channelID && channelFilter.channelName) throw new Error("Only channelID or channelName can be specified at the same time")
+    if(!channelFilter.channelName && !channelFilter.channelID) throw new Error("ChannelID or channelName has to be specified")
     let url = new URL(ENDPOINTS.Channel_info);
     url.searchParams.set("part", "brandingSettings");
-    if (isChannelName) {
-      url.searchParams.set("forUsername", id);
+    if (channelFilter.channelName) {
+      url.searchParams.set("forUsername", channelFilter.channelName);
     } else {
-      url.searchParams.set("id", id);
+      url.searchParams.set("id", channelFilter.channelID);
     }
-    url.searchParams.set("maxResults", maxResults);
+    url.searchParams.set("maxResults", maxResults.toString());
     let res = await this.getAPI(url);
     return res.items;
   }
@@ -335,7 +340,7 @@ class client {
 
   /**
    * @param {string} videoID the video id of which you wanna get the infos of captions
-   * @return {object} an object that describes the caption
+   * @returns {object} an object that describes the caption
    */
   async getCaptionInfos(videoID) {
     let url = new URL(ENDPOINTS.Caption_infos);
@@ -356,12 +361,198 @@ class client {
     let url = new URL(ENDPOINTS.Search);
     url.searchParams.set("q", query);
     if (type) url.searchParams.set("type", type);
-    url.searchParams.set("maxResults", maxResults);
+    url.searchParams.set("maxResults", maxResults.toString());
     let res = await this.getAPI(url);
     return res.items;
   }
 
+  /**
+   * 
+   * @param {import("./types").playlistFilter} filter The search filter; Only specify 1 argument
+   * @param {number} maxResults the maximum results, you get (default is 5)
+   * @returns {object} An object that represents the Playlists
+   */
+  async getPlaylists(filter, maxResults=5) {
+    if(filter.channelID && filter.playlistID) throw new Error("The channelID can't exist at the same time with the playlistID")
+    if(!filter.channelID && !filter.playlistID) throw new Error("One, channelID or playlistID needs to be specified")
+    let url = new URL(ENDPOINTS.playlist);
+    url.searchParams.set("part", "snippet")
+    if (filter.channelID) url.searchParams.set("channelId", filter.channelID)
+    if (filter.playlistID) url.searchParams.set("id", filter.playlistID);
+    url.searchParams.set("maxResults", maxResults.toString());
+    let res = await this.getAPI(url);
+    return res.items;
+  }
+
+  /**
+   * 
+   * @param {import("./types").playlistFilter} filter The search filter; Only specify 1 argument
+   * @param {number} maxResults the maximum results, you get (default is 5)
+   * @returns {object} An object that represents the PlaylistsContentDetails
+   */
+   async getPlaylistsContentDetails(filter, maxResults=5) {
+    if(filter.channelID && filter.playlistID) throw new Error("The channelID can't exist at the same time with the playlistID")
+    if(!filter.channelID && !filter.playlistID) throw new Error("One, channelID or playlistID needs to be specified")
+    let url = new URL(ENDPOINTS.playlist);
+    url.searchParams.set("part", "contentDetails")
+    if (filter.channelID) url.searchParams.set("channelId", filter.channelID)
+    if (filter.playlistID) url.searchParams.set("id", filter.playlistID);
+    url.searchParams.set("maxResults", maxResults.toString());
+    let res = await this.getAPI(url);
+    return res.items;
+  }
+
+  /**
+   * 
+   * @param {import("./types").playlistFilter} filter The search filter; Only specify 1 argument
+   * @param {number} maxResults the maximum results, you get (default is 5)
+   * @returns {object} An object that represents the PlaylistsLocalizations
+   */
+   async getPlaylistsLocalizations(filter, maxResults=5) {
+    if(filter.channelID && filter.playlistID) throw new Error("The channelID can't exist at the same time with the playlistID")
+    if(!filter.channelID && !filter.playlistID) throw new Error("One, channelID or playlistID needs to be specified")
+    let url = new URL(ENDPOINTS.playlist);
+    url.searchParams.set("part", "localizations")
+    if (filter.channelID) url.searchParams.set("channelId", filter.channelID)
+    if (filter.playlistID) url.searchParams.set("id", filter.playlistID);
+    url.searchParams.set("maxResults", maxResults.toString());
+    let res = await this.getAPI(url);
+    return res.items;
+  }
+
+  /**
+   * 
+   * @param {import("./types").playlistFilter} filter The search filter; Only specify 1 argument
+   * @param {number} maxResults the maximum results, you get (default is 5)
+   * @returns {object} An object that represents the PlaylistsPlayer
+   */
+   async getPlaylistsPlayer(filter, maxResults=5) {
+    if(filter.channelID && filter.playlistID) throw new Error("The channelID can't exist at the same time with the playlistID")
+    if(!filter.channelID && !filter.playlistID) throw new Error("One, channelID or playlistID needs to be specified")
+    let url = new URL(ENDPOINTS.playlist);
+    url.searchParams.set("part", "player")
+    if (filter.channelID) url.searchParams.set("channelId", filter.channelID)
+    if (filter.playlistID) url.searchParams.set("id", filter.playlistID);
+    url.searchParams.set("maxResults", maxResults.toString());
+    let res = await this.getAPI(url);
+    return res.items;
+  }
+
+  /**
+   * 
+   * @param {import("./types").playlistFilter} filter The search filter; Only specify 1 argument
+   * @param {number} maxResults the maximum results, you get (default is 5)
+   * @returns {object} An object that represents the PlaylistsStatus
+   */
+   async getPlaylistsStatus(filter, maxResults=5) {
+    if(filter.channelID && filter.playlistID) throw new Error("The channelID can't exist at the same time with the playlistID")
+    if(!filter.channelID && !filter.playlistID) throw new Error("One, channelID or playlistID needs to be specified")
+    let url = new URL(ENDPOINTS.playlist);
+    url.searchParams.set("part", "status")
+    if (filter.channelID) url.searchParams.set("channelId", filter.channelID)
+    if (filter.playlistID) url.searchParams.set("id", filter.playlistID);
+    url.searchParams.set("maxResults", maxResults.toString());
+    let res = await this.getAPI(url);
+    return res.items;
+  }
+
+  /**
+   * 
+   * @param {import("./types").playlistItemFilter} filter The filter for fetching the items
+   * @param {number} maxResults The maximal number of results you will get (default is 5)
+   * @returns {object} a object that represents the playlistsItems
+   */
+  async getPlaylistItems(filter, maxResults=5) {
+    if(filter.playlistItemID && filter.playlistID) throw new Error("The channelID can't exist at the same time with the playlistID")
+    if(!filter.playlistItemID && !filter.playlistID) throw new Error("One, channelID or playlistID needs to be specified")
+    let url = new URL(ENDPOINTS.playlist_items);
+    url.searchParams.set("part", "snippet")
+    url.searchParams.set("maxResults", maxResults.toString());
+    if(filter.playlistItemID) url.searchParams.set("id", filter.playlistItemID);
+    if(filter.playlistID) url.searchParams.set("playlistId", filter.playlistID);
+    let res = await this.getAPI(url);
+    return res.items;
+  }
   
+  /**
+   * 
+   * @param {import("./types").playlistItemFilter} filter The filter for fetching the items
+   * @param {number} maxResults The maximal number of results you will get (default is 5)
+   * @returns {object} a object that represents the playlistsItemsStatus
+   */
+   async getPlaylistItemsStatus(filter, maxResults=5) {
+    if(filter.playlistItemID && filter.playlistID) throw new Error("The channelID can't exist at the same time with the playlistID")
+    if(!filter.playlistItemID && !filter.playlistID) throw new Error("One, channelID or playlistID needs to be specified")
+    let url = new URL(ENDPOINTS.playlist_items);
+    url.searchParams.set("part", "status")
+    url.searchParams.set("maxResults", maxResults.toString());
+    if(filter.playlistItemID) url.searchParams.set("id", filter.playlistItemID);
+    if(filter.playlistID) url.searchParams.set("playlistId", filter.playlistID);
+    let res = await this.getAPI(url);
+    return res.items;
+  }
+  
+  /**
+   * 
+   * @param {import("./types").playlistItemFilter} filter The filter for fetching the items
+   * @param {number} maxResults The maximal number of results you will get (default is 5)
+   * @returns {object} a object that represents the playlistsItemsContentDetails
+   */
+   async getPlaylistItemsContentDetails(filter, maxResults=5) {
+    if(filter.playlistItemID && filter.playlistID) throw new Error("The channelID can't exist at the same time with the playlistID")
+    if(!filter.playlistItemID && !filter.playlistID) throw new Error("One, channelID or playlistID needs to be specified")
+    let url = new URL(ENDPOINTS.playlist_items);
+    url.searchParams.set("part", "contentDetails")
+    url.searchParams.set("maxResults", maxResults.toString());
+    if(filter.playlistItemID) url.searchParams.set("id", filter.playlistItemID);
+    if(filter.playlistID) url.searchParams.set("playlistId", filter.playlistID);
+    let res = await this.getAPI(url);
+    return res.items;
+  }
+
+  /**
+   * 
+   * @param {import("./types").commentFilter} filter the query filter
+   * @param {import("./types").commentFormatFilter} format the format filter for the response
+   * @param {number} maxResults the maximal amount of results (default is 20)
+   * @returns {object} An object that represents the comments
+   */
+
+  async getComments(filter, format, maxResults=20) {
+    if(filter.channelID && filter.commentID && filter.videoID) throw new Error("The channelID, commentID and videoID can't exist at the same time");
+    if(!filter.channelID && !filter.commentID && !filter.videoID) throw new Error("channelID, commentID or videoID has to be specified");
+    let url = new URL(ENDPOINTS.comment_threads);
+    url.searchParams.set("part", "snippet");
+    url.searchParams.set("textFormat", format);
+    url.searchParams.set("maxResults", maxResults.toString());
+    if(filter.videoID) url.searchParams.set("videoId", filter.videoID);
+    if(filter.commentID) url.searchParams.set("id", filter.commentID);
+    if(filter.channelID) url.searchParams.set("channelId", filter.channelID);
+    let res = await this.getAPI(url);
+    return res.items;
+  }
+
+  /**
+   * 
+   * @param {import("./types").commentFilter} filter the query filter
+   * @param {import("./types").commentFormatFilter} format the format filter for the response
+   * @param {number} maxResults the maximal amount of results (default is 20)
+   * @returns {object} An object that represents the commentsReplies
+   */
+
+   async getCommentsReplies(filter, format, maxResults=20) {
+    if(filter.channelID && filter.commentID && filter.videoID) throw new Error("The channelID, commentID and videoID can't exist at the same time");
+    if(!filter.channelID && !filter.commentID && !filter.videoID) throw new Error("channelID, commentID or videoID has to be specified");
+    let url = new URL(ENDPOINTS.comment_threads);
+    url.searchParams.set("part", "replies");
+    url.searchParams.set("textFormat", format);
+    url.searchParams.set("maxResults", maxResults.toString());
+    if(filter.videoID) url.searchParams.set("videoId", filter.videoID);
+    if(filter.commentID) url.searchParams.set("id", filter.commentID);
+    if(filter.channelID) url.searchParams.set("channelId", filter.channelID);
+    let res = await this.getAPI(url);
+    return res.items;
+  }
 }
 
 /**

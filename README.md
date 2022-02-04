@@ -12,20 +12,19 @@ Captions (can't list content without oauth)
 
 Search
 
-# To Do
-Comments
-
-CommentThreads
+Playlists
 
 PlaylistItems
 
-Playlists
+CommentThreads
 
-Subscriptions
-
-VideoCategories
+# To Do
 
 # Not doing
+VideoCategories (No need to, returns everytime a link to c/YouTube)
+
+Subscriptions (Not yet worth it)
+
 Members
 
 Membershiplevels
