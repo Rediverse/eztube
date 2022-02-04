@@ -1,24 +1,51 @@
 export type searchType = "channel" | "playlist" | "video";
 
 export interface playlistFilter {
-    channelID?: string,
-    playlistID?: string,
+  channelID?: string;
+  playlistID?: string;
 }
 
 export interface channelFilter {
-    channelID?: string,
-    channelName?: string,
+  channelID?: string;
+  channelName?: string;
 }
 
 export interface playlistItemFilter {
-    playlistID?: string,
-    playlistItemID?: string
+  playlistID?: string;
+  playlistItemID?: string;
 }
 
 export interface commentFilter {
-    channelID?: string,
-    videoID?: string,
-    commentID?: string,
+  channelID?: string;
+  videoID?: string;
+  commentID?: string;
 }
 
 export type commentFormatFilter = "html" | "plainText";
+
+export type getVideoInfosResponse = Array<getVideoInfosResponseItem>;
+
+interface getVideoInfosResponseItem {
+  kind: string;
+  etag: string;
+  id: string;
+  snippet: {
+    publishedAt: string;
+    channelId: string;
+    title: string;
+    description: string;
+    thumbnails: {
+      default: { url: string; width: number; height: number };
+      medium: { url: string; width: number; height: number };
+      high: { url: string; width: number; height: number };
+      standard: { url: string; width: number; height: number };
+      maxRes: { url: string; width: number; height: number };
+    };
+    channelTitle: string;
+    tags: Array<string>;
+    categoryId: string;
+    liveBroadcastContent: string;
+    localized: { title: string; description: string };
+    defaultAudioLanguage: string;
+  };
+}

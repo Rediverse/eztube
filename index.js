@@ -117,6 +117,7 @@ class client {
           throw new Error(e.message);
         }
       });
+    // return {}
     return returnValue;
   }
 
@@ -159,7 +160,7 @@ class client {
    *
    * @param {string} id the videoid
    * @param {number} maxResults the max results
-   * @returns {Array<object>} the array of found videos
+   * @returns {import("./types").getVideoInfosResponse} the array of found videos
    */
   async getVideoInfos(id, maxResults = 1) {
     let url = new URL(ENDPOINTS.Video_info);
