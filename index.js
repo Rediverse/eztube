@@ -94,7 +94,7 @@ class client {
     }
     epl.searchParams.set("key", this.key);
     let returnValue;
-    console.log(epl.href);
+    // console.log(epl.href);
     await axios
       .get(epl.href, { headers: headers })
       .then(({ data }) => {
@@ -464,8 +464,8 @@ class client {
    * @returns {import("./types").getPlaylistItemsResponse} a object that represents the playlistsItems
    */
   async getPlaylistItems(filter, maxResults=5) {
-    if(filter.playlistItemID && filter.playlistID) throw new Error("The channelID can't exist at the same time with the playlistID")
-    if(!filter.playlistItemID && !filter.playlistID) throw new Error("One, channelID or playlistID needs to be specified")
+    if(filter.playlistItemID && filter.playlistID) {logger.error("${info(api, error)} ", "The playlistItemID can't exist at the same time with the playlistID"); throw new Error("The channelID can't exist at the same time with the playlistID");}
+    if(!filter.playlistItemID && !filter.playlistID) {logger.error("${info(api, error)} ", "One, playlistItemID or playlistID needs to be specified"); throw new Error("One, channelID or playlistID needs to be specified");}
     let url = new URL(ENDPOINTS.playlist_items);
     url.searchParams.set("part", "snippet")
     url.searchParams.set("maxResults", maxResults.toString());
@@ -482,8 +482,8 @@ class client {
    * @returns {import("./types").getPlaylistsItemsStatusResponse} a object that represents the playlistsItemsStatus
    */
    async getPlaylistItemsStatus(filter, maxResults=5) {
-    if(filter.playlistItemID && filter.playlistID) throw new Error("The channelID can't exist at the same time with the playlistID")
-    if(!filter.playlistItemID && !filter.playlistID) throw new Error("One, channelID or playlistID needs to be specified")
+    if(filter.playlistItemID && filter.playlistID) {logger.error("${info(api, error)} ", "The playlistItemID can't exist at the same time with the playlistID"); throw new Error("The channelID can't exist at the same time with the playlistID");}
+    if(!filter.playlistItemID && !filter.playlistID) {logger.error("${info(api, error)} ", "One, playlistItemID or playlistID needs to be specified"); throw new Error("One, channelID or playlistID needs to be specified");}
     let url = new URL(ENDPOINTS.playlist_items);
     url.searchParams.set("part", "status")
     url.searchParams.set("maxResults", maxResults.toString());
@@ -500,8 +500,8 @@ class client {
    * @returns {import("./types").getPlaylistsItemsContentDetailsResponse} a object that represents the playlistsItemsContentDetails
    */
    async getPlaylistItemsContentDetails(filter, maxResults=5) {
-    if(filter.playlistItemID && filter.playlistID) throw new Error("The channelID can't exist at the same time with the playlistID")
-    if(!filter.playlistItemID && !filter.playlistID) throw new Error("One, channelID or playlistID needs to be specified")
+    if(filter.playlistItemID && filter.playlistID) {logger.error("${info(api, error)} ", "The playlistItemID can't exist at the same time with the playlistID"); throw new Error("The channelID can't exist at the same time with the playlistID");}
+    if(!filter.playlistItemID && !filter.playlistID) {logger.error("${info(api, error)} ", "One, playlistItemID or playlistID needs to be specified"); throw new Error("One, channelID or playlistID needs to be specified");}
     let url = new URL(ENDPOINTS.playlist_items);
     url.searchParams.set("part", "contentDetails")
     url.searchParams.set("maxResults", maxResults.toString());
@@ -520,8 +520,8 @@ class client {
    */
 
   async getComments(filter, format, maxResults=20) {
-    if(filter.channelID && filter.commentID && filter.videoID) throw new Error("The channelID, commentID and videoID can't exist at the same time");
-    if(!filter.channelID && !filter.commentID && !filter.videoID) throw new Error("channelID, commentID or videoID has to be specified");
+    if(filter.channelID && filter.commentID && filter.videoID) {logger.error("${info(api, error)} ", "The channelID, commentID and videoID can't exist at the same time"); throw new Error("The channelID, commentID and videoID can't exist at the same time"); }
+    if(!filter.channelID && !filter.commentID && !filter.videoID) {logger.error("${info(api, error)} ", "channelID, commentID or videoID has to be specified"); throw new Error("channelID, commentID or videoID has to be specified"); }
     let url = new URL(ENDPOINTS.comment_threads);
     url.searchParams.set("part", "snippet");
     url.searchParams.set("textFormat", format);
@@ -542,8 +542,8 @@ class client {
    */
 
    async getCommentsReplies(filter, format, maxResults=20) {
-    if(filter.channelID && filter.commentID && filter.videoID) throw new Error("The channelID, commentID and videoID can't exist at the same time");
-    if(!filter.channelID && !filter.commentID && !filter.videoID) throw new Error("channelID, commentID or videoID has to be specified");
+    if(filter.channelID && filter.commentID && filter.videoID) {logger.error("${info(api, error)} ", "The channelID, commentID and videoID can't exist at the same time"); throw new Error("The channelID, commentID and videoID can't exist at the same time")};
+    if(!filter.channelID && !filter.commentID && !filter.videoID) { logger.error("${info(api, error)}", "channelID, commentID or videoID has to be specified"); throw new Error("channelID, commentID or videoID has to be specified");}
     let url = new URL(ENDPOINTS.comment_threads);
     url.searchParams.set("part", "replies");
     url.searchParams.set("textFormat", format);
