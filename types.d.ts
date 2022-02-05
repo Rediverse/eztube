@@ -72,40 +72,65 @@ interface getCaptionInfosResponseItem {
 	};
 }
 
-export type getChannelStatsReponse = Array<getChannelStatsReponseItem>
+export type getChannelBrandingResponse = Array<getChannelBrandingResponseItem>;
 
-export interface getChannelStatsReponseItem {
-	kind: string,
-	etag: string,
-	id: string,
-	statistics: {
-		viewCount: string,
-		subscriberCount: string,
-		hiddenSubscriberCount: boolean,
-		videoCount: string
-	}
+interface getChannelBrandingResponseItem {
+	kind: string;
+	etag: string;
+	id: string;
+	brandingSettings: { channel: Object; image: Object };
 }
 
-export type getChannelLocalizationsResponse = Array<getChannelLocalizationsResponseItem>;
+export type getChannelStatusResponse = Array<getChannelStatusResponseItem>;
+
+interface getChannelStatusResponseItem {
+	kind: string;
+	etag: string;
+	id: string;
+	status: {
+		privacyStatus: string;
+		isLinked: boolean;
+		longUploadsStatus: string;
+		madeForKids: boolean;
+	};
+}
+
+export type getChannelStatsReponse = Array<getChannelStatsReponseItem>;
+
+export interface getChannelStatsReponseItem {
+	kind: string;
+	etag: string;
+	id: string;
+	statistics: {
+		viewCount: string;
+		subscriberCount: string;
+		hiddenSubscriberCount: boolean;
+		videoCount: string;
+	};
+}
+
+export type getChannelLocalizationsResponse = Array<
+	getChannelLocalizationsResponseItem
+>;
 
 export interface getChannelLocalizationsResponseItem {
-	kind: string,
-	id: string,
-	etag: string,
+	kind: string;
+	id: string;
+	etag: string;
 	localizations?: {
 		[name: string]: {
-			title: string,
-			description: string
-		}
-	}
+			title: string;
+			description: string;
+		};
+	};
 }
 
 export type getChannelHomepageResponse = Array<getChannelHomepageResponseItem>;
 
 export interface getChannelHomepageResponseItem {
-	kind: string,
-	etag: string,
-	id: string,
+	kind: string;
+	etag: string;
+	id: string;
 	snippet: {
 		type: string,
 		channelId: string,

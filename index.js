@@ -222,7 +222,7 @@ class client {
    *
    * @param {import("./types").channelFilter} channelFilter the channelfilter
    * @param {number} maxResults the max results
-   * @returns {Array<object>} the array of found channels
+   * @returns {import("./types").getChannelStatusResponse} the array of found channels
    */
   async getChannelStatus(channelFilter = false, maxResults = 1) {
     if(channelFilter.channelID && channelFilter.channelName) throw new Error("Only channelID or channelName can be specified at the same time")
@@ -285,7 +285,7 @@ class client {
    *
    * @param {import("./types").channelFilter} channelFilter the channelfilter
    * @param {number} maxResults the max results
-   * @returns {Array<object>} the array of found channels
+   * @returns {import("./types").getChannelBrandingResponse} the array of found channels
    */
   async getChannelBranding(channelFilter, maxResults = 1) {
     if(channelFilter.channelID && channelFilter.channelName) throw new Error("Only channelID or channelName can be specified at the same time")
