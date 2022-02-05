@@ -71,3 +71,17 @@ interface getCaptionInfosResponseItem {
 		status: string;
 	};
 }
+
+export type getChannelStatsReponse = Array<getChannelStatsReponseItem>
+
+export interface getChannelStatsReponseItem {
+	kind: string,
+	etag: string,
+	id: string,
+	statistics: {
+		viewCount: string,
+		subscriberCount: string,
+		hiddenSubscriberCount: boolean,
+		videoCount: string
+	}
+}
