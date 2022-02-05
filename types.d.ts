@@ -94,3 +94,33 @@ interface getChannelStatusResponseItem {
 		madeForKids: boolean;
 	};
 }
+
+export type getChannelStatsReponse = Array<getChannelStatsReponseItem>;
+
+export interface getChannelStatsReponseItem {
+	kind: string;
+	etag: string;
+	id: string;
+	statistics: {
+		viewCount: string;
+		subscriberCount: string;
+		hiddenSubscriberCount: boolean;
+		videoCount: string;
+	};
+}
+
+export type getChannelLocalizationsResponse = Array<
+	getChannelLocalizationsResponseItem
+>;
+
+export interface getChannelLocalizationsResponseItem {
+	kind: string;
+	id: string;
+	etag: string;
+	localizations?: {
+		[name: string]: {
+			title: string;
+			description: string;
+		};
+	};
+}
