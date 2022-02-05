@@ -71,3 +71,26 @@ interface getCaptionInfosResponseItem {
 		status: string;
 	};
 }
+
+export type getChannelBrandingResponse = Array<getChannelBrandingResponseItem>;
+
+interface getChannelBrandingResponseItem {
+	kind: string;
+	etag: string;
+	id: string;
+	brandingSettings: { channel: Object; image: Object };
+}
+
+export type getChannelStatusResponse = Array<getChannelStatusResponseItem>;
+
+interface getChannelStatusResponseItem {
+	kind: string;
+	etag: string;
+	id: string;
+	status: {
+		privacyStatus: string;
+		isLinked: boolean;
+		longUploadsStatus: string;
+		madeForKids: boolean;
+	};
+}
