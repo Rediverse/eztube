@@ -4,6 +4,6 @@ const eztube = require("./index");
     let result;
     result = await eztube.client()
       .setToken(require("./key"))
-      .getChannelPage("UCZjkJX6z-fKoxt-yQ3MuHPw")
+      .getChannelPageContent("UCZjkJX6z-fKoxt-yQ3MuHPw", "")
     console.log(result)
 })();

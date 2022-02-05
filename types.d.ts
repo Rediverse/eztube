@@ -113,3 +113,14 @@ export interface getChannelHomepageResponseItem {
 		position: number
 	}
 }
+
+export type getChannelPageContentResponse = Array<getChannelPageContentResponseItem>;
+
+export interface getChannelPageContentResponseItem {
+	kind: string,
+	etag: string,
+	id: string,
+	contentDetails?: {
+		channel: Array<string>
+	}
+}
