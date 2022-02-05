@@ -341,7 +341,7 @@ class client {
 
   /**
    * @param {string} videoID the video id of which you wanna get the infos of captions
-   * @returns {object} an object that describes the caption
+   * @returns {import("./types").getCaptionInfosResponse} an object that describes the caption
    */
   async getCaptionInfos(videoID) {
     let url = new URL(ENDPOINTS.Caption_infos);
