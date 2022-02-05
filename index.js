@@ -174,7 +174,7 @@ class client {
    *
    * @param {string} id the videoid
    * @param {number} maxResults the max results
-   * @returns {Array<object>} the array of found videos
+   * @returns {import("./types").getVideoStatusResponse} the array of found videos
    */
   async getVideoStatus(id, maxResults = 1) {
     let url = new URL(ENDPOINTS.Video_info);
@@ -187,7 +187,7 @@ class client {
   /**
    *
    * @param {string} id the videoid
-   * @returns {Array<object>} the array of found videos
+   * @returns {string} the array of found videos
    */
   async getPlayerEmbed(id) {
     let url = new URL(ENDPOINTS.Video_info);
@@ -201,7 +201,7 @@ class client {
    *
    * @param {import("./types").channelFilter} channelFilter the channelfilter
    * @param {number} maxResults the max results
-   * @returns {Array<object>} the array of found channels
+   * @returns {import("./types").getChannelDetailsResponse} the array of found channels
    */
   async getChannelDetails(channelFilter = false, maxResults = 1) {
     if(channelFilter.channelID && channelFilter.channelName) throw new Error("Only channelID or channelName can be specified at the same time")
@@ -243,7 +243,7 @@ class client {
    *
    * @param {import("./types").channelFilter} channelFilter the channelfilter
    * @param {number} maxResults the max results
-   * @returns {Array<object>} the array of found channels
+   * @returns {import("./types").getChannelLocalizationsResponse} the array of found channels
    */
   async getChannelLocalizations(channelFilter = false, maxResults = 1) {
     if(channelFilter.channelID && channelFilter.channelName) throw new Error("Only channelID or channelName can be specified at the same time")
@@ -264,7 +264,7 @@ class client {
    *
    * @param {import("./types").channelFilter} channelFilter the channelfilter
    * @param {number} maxResults the max results
-   * @returns {Array<object>} the array of found channels
+   * @returns {import("./types").getChannelStatsReponse} the array of found channels
    */
   async getChannelStats(channelFilter = false, maxResults = 1) {
     if(channelFilter.channelID && channelFilter.channelName) throw new Error("Only channelID or channelName can be specified at the same time")
@@ -305,7 +305,7 @@ class client {
   /**
    * @param {string} id the Channel id of which you wanna get the channelpage
    * @param {string} csid the channelsection-id which you can get by retrieving the id from the item
-   * @returns {object} the object used to describe the channelpage
+   * @returns {import("./types").getChannelHomepageResponse} the object used to describe the channelpage
    *
    * Please note: you don't need to give the channelid, when you give the csid. Set then as channelid just undefined or a blank string
    */
@@ -323,7 +323,7 @@ class client {
   /**
    * @param {string} id the Channel id of which you wanna get the channelpage
    * @param {string} csid the channelsection-id which you can get by retrieving the id from the item
-   * @returns {object} the object used to describe the content of the channelpage
+   * @returns {import("./types").getChannelPageContentResponse} the object used to describe the content of the channelpage
    *
    * Please note: you don't need to give the channelid, when you give the csid. Set then as channelid just undefined or a blank string
    */
@@ -356,7 +356,7 @@ class client {
    * @param {string} query the search query
    * @param {import("./types").searchType} type the type of searchresults (video, channel, playlist or undefined)
    * @param {Number} maxResults the number of results
-   * @returns the searchresults
+   * @returns {import("./types").searchResponse} the searchresults
    */
   async search(query, type = undefined, maxResults = 1) {
     let url = new URL(ENDPOINTS.Search);
@@ -371,7 +371,7 @@ class client {
    * 
    * @param {import("./types").playlistFilter} filter The search filter; Only specify 1 argument
    * @param {number} maxResults the maximum results, you get (default is 5)
-   * @returns {object} An object that represents the Playlists
+   * @returns {import("./types").getPlaylistsResponse} An object that represents the Playlists
    */
   async getPlaylists(filter, maxResults=5) {
     if(filter.channelID && filter.playlistID) throw new Error("The channelID can't exist at the same time with the playlistID")
@@ -389,7 +389,7 @@ class client {
    * 
    * @param {import("./types").playlistFilter} filter The search filter; Only specify 1 argument
    * @param {number} maxResults the maximum results, you get (default is 5)
-   * @returns {object} An object that represents the PlaylistsContentDetails
+   * @returns {import("./types").getPlaylistsContentDetailsResponse} An object that represents the PlaylistsContentDetails
    */
    async getPlaylistsContentDetails(filter, maxResults=5) {
     if(filter.channelID && filter.playlistID) throw new Error("The channelID can't exist at the same time with the playlistID")
@@ -407,7 +407,7 @@ class client {
    * 
    * @param {import("./types").playlistFilter} filter The search filter; Only specify 1 argument
    * @param {number} maxResults the maximum results, you get (default is 5)
-   * @returns {object} An object that represents the PlaylistsLocalizations
+   * @returns {import("./types").getPlaylistsLocalizationsResponse} An object that represents the PlaylistsLocalizations
    */
    async getPlaylistsLocalizations(filter, maxResults=5) {
     if(filter.channelID && filter.playlistID) throw new Error("The channelID can't exist at the same time with the playlistID")
@@ -425,7 +425,7 @@ class client {
    * 
    * @param {import("./types").playlistFilter} filter The search filter; Only specify 1 argument
    * @param {number} maxResults the maximum results, you get (default is 5)
-   * @returns {object} An object that represents the PlaylistsPlayer
+   * @returns {import("./types").getPlaylistsPlayerResponse} An object that represents the PlaylistsPlayer
    */
    async getPlaylistsPlayer(filter, maxResults=5) {
     if(filter.channelID && filter.playlistID) throw new Error("The channelID can't exist at the same time with the playlistID")
@@ -443,7 +443,7 @@ class client {
    * 
    * @param {import("./types").playlistFilter} filter The search filter; Only specify 1 argument
    * @param {number} maxResults the maximum results, you get (default is 5)
-   * @returns {object} An object that represents the PlaylistsStatus
+   * @returns {import("./types").getPlaylistsStatusResponse} An object that represents the PlaylistsStatus
    */
    async getPlaylistsStatus(filter, maxResults=5) {
     if(filter.channelID && filter.playlistID) throw new Error("The channelID can't exist at the same time with the playlistID")
@@ -461,7 +461,7 @@ class client {
    * 
    * @param {import("./types").playlistItemFilter} filter The filter for fetching the items
    * @param {number} maxResults The maximal number of results you will get (default is 5)
-   * @returns {object} a object that represents the playlistsItems
+   * @returns {import("./types").getPlaylistItemsResponse} a object that represents the playlistsItems
    */
   async getPlaylistItems(filter, maxResults=5) {
     if(filter.playlistItemID && filter.playlistID) throw new Error("The channelID can't exist at the same time with the playlistID")
@@ -479,7 +479,7 @@ class client {
    * 
    * @param {import("./types").playlistItemFilter} filter The filter for fetching the items
    * @param {number} maxResults The maximal number of results you will get (default is 5)
-   * @returns {object} a object that represents the playlistsItemsStatus
+   * @returns {import("./types").getPlaylistsItemsStatusResponse} a object that represents the playlistsItemsStatus
    */
    async getPlaylistItemsStatus(filter, maxResults=5) {
     if(filter.playlistItemID && filter.playlistID) throw new Error("The channelID can't exist at the same time with the playlistID")
@@ -497,7 +497,7 @@ class client {
    * 
    * @param {import("./types").playlistItemFilter} filter The filter for fetching the items
    * @param {number} maxResults The maximal number of results you will get (default is 5)
-   * @returns {object} a object that represents the playlistsItemsContentDetails
+   * @returns {import("./types").getPlaylistsItemsContentDetailsResponse} a object that represents the playlistsItemsContentDetails
    */
    async getPlaylistItemsContentDetails(filter, maxResults=5) {
     if(filter.playlistItemID && filter.playlistID) throw new Error("The channelID can't exist at the same time with the playlistID")
@@ -516,7 +516,7 @@ class client {
    * @param {import("./types").commentFilter} filter the query filter
    * @param {import("./types").commentFormatFilter} format the format filter for the response
    * @param {number} maxResults the maximal amount of results (default is 20)
-   * @returns {object} An object that represents the comments
+   * @returns {import("./types").getCommentsRepsonse} An object that represents the comments
    */
 
   async getComments(filter, format, maxResults=20) {
@@ -538,7 +538,7 @@ class client {
    * @param {import("./types").commentFilter} filter the query filter
    * @param {import("./types").commentFormatFilter} format the format filter for the response
    * @param {number} maxResults the maximal amount of results (default is 20)
-   * @returns {object} An object that represents the commentsReplies
+   * @returns {import("./types").getCommentsRepliesRepsonse} An object that represents the commentsReplies
    */
 
    async getCommentsReplies(filter, format, maxResults=20) {

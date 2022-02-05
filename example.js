@@ -4,6 +4,6 @@ const eztube = require("./index");
     let result;
     result = await eztube.client()
       .setToken(require("./key"))
-      .getChannelPageContent("UCZjkJX6z-fKoxt-yQ3MuHPw", "")
+      .getCommentsReplies({videoID: "91uNPxPoVww"}, "html")
     console.log(result)
 })();
