@@ -85,3 +85,17 @@ export interface getChannelStatsReponseItem {
 		videoCount: string
 	}
 }
+
+export type getChannelLocalizationsResponse = Array<getChannelLocalizationsResponseItem>;
+
+export interface getChannelLocalizationsResponseItem {
+	kind: string,
+	id: string,
+	etag: string,
+	localizations?: {
+		[name: string]: {
+			title: string,
+			description: string
+		}
+	}
+}
