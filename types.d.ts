@@ -99,3 +99,17 @@ export interface getChannelLocalizationsResponseItem {
 		}
 	}
 }
+
+export type getChannelHomepageResponse = Array<getChannelHomepageResponseItem>;
+
+export interface getChannelHomepageResponseItem {
+	kind: string,
+	etag: string,
+	id: string,
+	snippet: {
+		type: string,
+		channelId: string,
+		title?: string,
+		position: number
+	}
+}
