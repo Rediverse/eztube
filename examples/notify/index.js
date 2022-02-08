@@ -62,5 +62,9 @@
       console.log("An error occued!");
       process.exit(1);
     }
-  });
+  }, 10*60*1000); // 1000 * 1ms = 1 s, 60 * 1s = 1m, 10 * 1m = 10m
 })();
+
+// Qutota  cost:
+// 12 Quota / hour
+// 288 / day, man hat 10000 Quota / day, sollte kein problem sein
