@@ -78,7 +78,7 @@ class client {
   }
 
   /**
-   *
+   * Quota cost: ?
    * @param {string|URL} ENDPOINT the enpoint url
    * @param {object} headers the headers
    * @returns {object} returns the response object
@@ -122,6 +122,7 @@ class client {
   }
 
   /**
+   * Quota cost: 0
    * @returns {string}
    *
    * get your current api-key
@@ -131,6 +132,7 @@ class client {
   }
 
   /**
+   * Quota cost: 0
    * @param {string} value Your new API-Key
    *
    * set your api-key
@@ -139,6 +141,7 @@ class client {
     this.#token = value;
   }
   /**
+   * Quota cost: 0
    * @returns {string}
    *
    * get your current api-key
@@ -147,6 +150,7 @@ class client {
     return this.key;
   }
   /**
+   * Quota cost: 0
    * @param {string} value Your new API-Key
    *
    * set your api-key
@@ -157,7 +161,7 @@ class client {
   }
 
   /**
-   *
+   * Quota cost: 1
    * @param {string} id the videoid
    * @param {number} maxResults the max results
    * @returns {import("./types").getVideoInfosResponse} the array of found videos
@@ -171,7 +175,7 @@ class client {
     return res.items;
   }
   /**
-   *
+   * Quota cost: 1
    * @param {string} id the videoid
    * @param {number} maxResults the max results
    * @returns {import("./types").getVideoStatusResponse} the array of found videos
@@ -185,7 +189,7 @@ class client {
     return res.items;
   }
   /**
-   *
+   * Quota cost: 1
    * @param {string} id the videoid
    * @returns {string} the array of found videos
    */
@@ -198,7 +202,7 @@ class client {
     return res.items[0]?.player.embedHtml;
   }
   /**
-   *
+   * Quota cost: 1
    * @param {import("./types").channelFilter} channelFilter the channelfilter
    * @param {number} maxResults the max results
    * @returns {import("./types").getChannelDetailsResponse} the array of found channels
@@ -219,7 +223,7 @@ class client {
   }
 
   /**
-   *
+   * Quota cost: 1
    * @param {import("./types").channelFilter} channelFilter the channelfilter
    * @param {number} maxResults the max results
    * @returns {import("./types").getChannelStatusResponse} the array of found channels
@@ -240,7 +244,7 @@ class client {
   }
 
   /**
-   *
+   * Quota cost: 1
    * @param {import("./types").channelFilter} channelFilter the channelfilter
    * @param {number} maxResults the max results
    * @returns {import("./types").getChannelLocalizationsResponse} the array of found channels
@@ -261,7 +265,7 @@ class client {
   }
 
   /**
-   *
+   * Quota cost: 1
    * @param {import("./types").channelFilter} channelFilter the channelfilter
    * @param {number} maxResults the max results
    * @returns {import("./types").getChannelStatsReponse} the array of found channels
@@ -282,7 +286,7 @@ class client {
   }
 
     /**
-   *
+   * Quota cost: 1
    * @param {import("./types").channelFilter} channelFilter the channelfilter
    * @param {number} maxResults the max results
    * @returns {import("./types").getChannelContentDetailsReponse} the array of related playlists
@@ -303,7 +307,7 @@ class client {
     }
 
   /**
-   *
+   * Quota cost: 1
    * @param {import("./types").channelFilter} channelFilter the channelfilter
    * @param {number} maxResults the max results
    * @returns {import("./types").getChannelBrandingResponse} the array of found channels
@@ -324,6 +328,7 @@ class client {
   }
 
   /**
+   * Quota cost: 1
    * @param {string} id the Channel id of which you wanna get the channelpage
    * @param {string} csid the channelsection-id which you can get by retrieving the id from the item
    * @returns {import("./types").getChannelHomepageResponse} the object used to describe the channelpage
@@ -342,6 +347,7 @@ class client {
     return res.items;
   }
   /**
+   * Quota cost: 1
    * @param {string} id the Channel id of which you wanna get the channelpage
    * @param {string} csid the channelsection-id which you can get by retrieving the id from the item
    * @returns {import("./types").getChannelPageContentResponse} the object used to describe the content of the channelpage
@@ -361,6 +367,7 @@ class client {
   }
 
   /**
+   * Quota cost: 50
    * @param {string} videoID the video id of which you wanna get the infos of captions
    * @returns {import("./types").getCaptionInfosResponse} an object that describes the caption
    */
@@ -373,7 +380,7 @@ class client {
   }
 
   /**
-   *
+   * Quota cost: 100
    * @param {import("./types").searchFilter} filter the search query
    * @param {Number} maxResults the number of results
    * @returns {import("./types").searchResponse} the searchresults
@@ -390,7 +397,7 @@ class client {
   }
 
   /**
-   * 
+   * Quota cost: 1
    * @param {import("./types").playlistFilter} filter The search filter; Only specify 1 argument
    * @param {number} maxResults the maximum results, you get (default is 5)
    * @returns {import("./types").getPlaylistsResponse} An object that represents the Playlists
@@ -408,7 +415,7 @@ class client {
   }
 
   /**
-   * 
+   * Quota cost: 1
    * @param {import("./types").playlistFilter} filter The search filter; Only specify 1 argument
    * @param {number} maxResults the maximum results, you get (default is 5)
    * @returns {import("./types").getPlaylistsContentDetailsResponse} An object that represents the PlaylistsContentDetails
@@ -426,7 +433,7 @@ class client {
   }
 
   /**
-   * 
+   * Quota cost: 1
    * @param {import("./types").playlistFilter} filter The search filter; Only specify 1 argument
    * @param {number} maxResults the maximum results, you get (default is 5)
    * @returns {import("./types").getPlaylistsLocalizationsResponse} An object that represents the PlaylistsLocalizations
@@ -444,7 +451,7 @@ class client {
   }
 
   /**
-   * 
+   * Quota cost: 1
    * @param {import("./types").playlistFilter} filter The search filter; Only specify 1 argument
    * @param {number} maxResults the maximum results, you get (default is 5)
    * @returns {import("./types").getPlaylistsPlayerResponse} An object that represents the PlaylistsPlayer
@@ -462,7 +469,7 @@ class client {
   }
 
   /**
-   * 
+   * Quota cost: 1
    * @param {import("./types").playlistFilter} filter The search filter; Only specify 1 argument
    * @param {number} maxResults the maximum results, you get (default is 5)
    * @returns {import("./types").getPlaylistsStatusResponse} An object that represents the PlaylistsStatus
@@ -480,7 +487,7 @@ class client {
   }
 
   /**
-   * 
+   * Quota cost: 1
    * @param {import("./types").playlistItemFilter} filter The filter for fetching the items
    * @param {number} maxResults The maximal number of results you will get (default is 5)
    * @returns {import("./types").getPlaylistItemsResponse} a object that represents the playlistsItems
@@ -498,7 +505,7 @@ class client {
   }
   
   /**
-   * 
+   * Quota cost: 1
    * @param {import("./types").playlistItemFilter} filter The filter for fetching the items
    * @param {number} maxResults The maximal number of results you will get (default is 5)
    * @returns {import("./types").getPlaylistsItemsStatusResponse} a object that represents the playlistsItemsStatus
@@ -516,7 +523,7 @@ class client {
   }
   
   /**
-   * 
+   * Quota cost: 1
    * @param {import("./types").playlistItemFilter} filter The filter for fetching the items
    * @param {number} maxResults The maximal number of results you will get (default is 5)
    * @returns {import("./types").getPlaylistsItemsContentDetailsResponse} a object that represents the playlistsItemsContentDetails
@@ -534,7 +541,7 @@ class client {
   }
 
   /**
-   * 
+   * Quota cost: 1
    * @param {import("./types").commentFilter} filter the query filter
    * @param {import("./types").commentFormatFilter} format the format filter for the response
    * @param {number} maxResults the maximal amount of results (default is 20)
@@ -556,7 +563,7 @@ class client {
   }
 
   /**
-   * 
+   * Quota cost: 1
    * @param {import("./types").commentFilter} filter the query filter
    * @param {import("./types").commentFormatFilter} format the format filter for the response
    * @param {number} maxResults the maximal amount of results (default is 20)

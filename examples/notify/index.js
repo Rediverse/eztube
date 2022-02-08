@@ -66,5 +66,5 @@
 })();
 
 // Qutota  cost:
-// 12 Quota / hour
+// 12 Quota / hour (2/anfrage, 6 anfragen / hour, )
 // 288 / day, man hat 10000 Quota / day, sollte kein problem sein
