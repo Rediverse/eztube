@@ -30,6 +30,9 @@ interface getVideoInfosResponseItem {
   etag: string;
   id: string;
   snippet: {
+    /**
+     * Time is formated in RFC 3339
+     */
     publishedAt: string;
     channelId: string;
     title: string;
@@ -58,6 +61,9 @@ interface getCaptionInfosResponseItem {
   id: string;
   snippet: {
     videoId: string;
+    /**
+     * Time is formated in RFC 3339
+     */
     lastUpdated: string;
     trackKind: string;
     language: string;
@@ -102,7 +108,10 @@ export interface getChannelStatsReponseItem {
   etag: string;
   id: string;
   statistics: {
-    viewCount: string;
+    /**
+     * is set when hiddenSubscriberCount is equally to false
+     */
+    viewCount?: string;
     subscriberCount: string;
     hiddenSubscriberCount: boolean;
     videoCount: string;
@@ -175,6 +184,9 @@ interface getChannelDetailsResponseItem {
   snippet: {
     title: string;
     description: string;
+    /**
+     * Time is formated in RFC 3339
+     */
     publishedAt: string;
     thumbnails: {
       default: {
@@ -222,6 +234,9 @@ export interface getPlaylistsResponseItem {
   etag: string;
   id: string;
   snippet: {
+    /**
+     * Time is formated in RFC 3339
+     */
     publishedAt: string;
     channelId: string;
     title: string;
@@ -296,6 +311,9 @@ export interface getPlaylistItemsResponseItem {
   etag: string;
   id: string;
   snippet: {
+    /**
+     * Time is formated in RFC 3339
+     */
     publishedAt: string;
     channelId: string;
     title: string;
@@ -367,7 +385,13 @@ export interface getCommentsRepsonseItem {
 				canRate: boolean,
 				viewerRating: string,
 				likeCount: number,
+        /**
+         * Time is formated in RFC 3339
+         */
 				publishedAt: string,
+        /**
+         * Time is formated in RFC 3339
+         */
 				updatedAt: string
 			},
 		},
@@ -401,7 +425,13 @@ export interface getCommentsRepliesRepsonseItem {
 				canRate: boolean,
 				viewerRating: string,
 				likeCount: number,
+        /**
+         * Time is formated in RFC 3339
+         */
 				publishedAt: string,
+        /**
+         * Time is formated in RFC 3339
+         */
 				updatedAt: string
 			},
 		}>
@@ -409,11 +439,39 @@ export interface getCommentsRepliesRepsonseItem {
 }
 
 export interface searchFilter {
+  /**
+   * That what you normally type into the youtube search bar comes here
+   */
   q?: string,
   channelId?: string,
   channelType?: "any"|"show",
   eventType?: "completed"|"live"|"upcoming",
-  type?: "channel"|"playlist"|"video"
+  type?: "channel"|"playlist"|"video",
+  /**
+   * "(latitude,longitude)" for ex. "(37.42307,-122.08427)"
+   */
+  location?: string,
+  /**
+   * "x[m/km/mi/ft]" for ex. "10km"
+   */
+  locationRadius?: string,
+  order?: "date"|"rating"|"relevance"|"title"|"videoCount"|"viewCount",
+  /**
+   * Time is formated in RFC 3339
+   */
+  publishedAfter?: string,
+  /**
+   * Time is formated in RFC 3339
+   */
+  publishedBefore?: string,
+  safeSearchsafeSearch?: "none"|"moderate"|"strict",
+  videoDefinition?: "any"|"high"|"standard",
+  videoDimension?: "2d"|"3d"|"any",
+  videoDuration?: "any"|"long"|"medium"|"short",
+  videoEmbeddable?: "any"|"true",
+  videoLicense?: "any"|"creativeCommon"|"youtube",
+  videoSyndicated?: "any"|"true",
+  videoType?: "any"|"episode"|"movie"
 }
 
 export type getChannelContentDetailsReponse = Array<getChannelContentDetailsReponseItem>;
