@@ -281,6 +281,27 @@ class client {
     return res.items;
   }
 
+    /**
+   *
+   * @param {import("./types").channelFilter} channelFilter the channelfilter
+   * @param {number} maxResults the max results
+   * @returns {import("./types").getChannelContentDetailsReponse} the array of related playlists
+   */
+     async getChannelContentDetails(channelFilter = false, maxResults = 1) {
+      if(channelFilter.channelID && channelFilter.channelName) throw new Error("Only channelID or channelName can be specified at the same time")
+      if(!channelFilter.channelName && !channelFilter.channelID) throw new Error("ChannelID or channelName has to be specified")
+      let url = new URL(ENDPOINTS.Channel_info);
+      url.searchParams.set("part", "contentDetails");
+      if (channelFilter.channelName) {
+        url.searchParams.set("forUsername", channelFilter.channelName);
+      } else {
+        url.searchParams.set("id", channelFilter.channelID);
+      }
+      url.searchParams.set("maxResults", maxResults.toString());
+      let res = await this.getAPI(url);
+      return res.items;
+    }
+
   /**
    *
    * @param {import("./types").channelFilter} channelFilter the channelfilter
@@ -353,15 +374,16 @@ class client {
 
   /**
    *
-   * @param {string} query the search query
-   * @param {import("./types").searchType} type the type of searchresults (video, channel, playlist or undefined)
+   * @param {import("./types").searchFilter} filter the search query
    * @param {Number} maxResults the number of results
    * @returns {import("./types").searchResponse} the searchresults
    */
-  async search(query, type = undefined, maxResults = 1) {
+  async search(filter, maxResults = 1) {
     let url = new URL(ENDPOINTS.Search);
-    url.searchParams.set("q", query);
-    if (type) url.searchParams.set("type", type);
+    let vals = Object.values(filter);
+    Object.keys(filter).forEach((el, i) => {
+      url.searchParams.set(el, vals[i]);
+    })
     url.searchParams.set("maxResults", maxResults.toString());
     let res = await this.getAPI(url);
     return res.items;

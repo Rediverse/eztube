@@ -407,3 +407,26 @@ export interface getCommentsRepliesRepsonseItem {
 		}>
 	}
 }
+
+export interface searchFilter {
+  q?: string,
+  channelId?: string,
+  channelType?: "any"|"show",
+  eventType?: "completed"|"live"|"upcoming",
+  type?: "channel"|"playlist"|"video"
+}
+
+export type getChannelContentDetailsReponse = Array<getChannelContentDetailsReponseItem>;
+
+export interface getChannelContentDetailsReponseItem {
+  kind: string,
+  etag: string,
+  id: string,
+  contentDetails?: {
+    relatedPlaylists: {
+      likes: string,
+      favorites: string,
+      uploads: string
+    }
+  }
+}
