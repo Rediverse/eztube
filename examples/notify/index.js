@@ -1,7 +1,8 @@
 (async function () {
   const { channel } = require("./config");
 
-  const client = require("../../index").client(require("./key"));
+  const client = require("../../index").client();
+  client.soufdaskjfiasdjhaskfdhjkasdhfjskdhfjskdhfjagshjdgajszhghdjkfhsukdhfeusfdjfsjkehakhdfksjhgfsuhfskhfksejuzfusdfhusegfahsgfsdjfthdkfjghlsifjhsuidfhfdkjgliksdjfoisdgfjklfjgjlikdjgilsjgslkdgjhdfuhgsiufhekiuhfslikdfhsejf(require("./key"));
 
   let channelVideos = [];
   try {
