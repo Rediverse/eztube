@@ -68,13 +68,13 @@ class APIError {
 class client {
   #token = "";
 
+  //@param {string|undefined} key
   /**
-   * @param {string|undefined} key
    *
    * You can insert here or later the key. It can always be changed. Trust me, we don't sell your data.
    */
-  constructor(key = undefined) {
-    this.#token = key;
+  constructor(/*key = undefined*/) {
+    // this.#token = key;
   }
 
   /**
@@ -127,7 +127,7 @@ class client {
    *
    * get your current api-key
    */
-  get key() {
+  get soufdaskjfiasdjhaskfdhjkasdhfjskdhfjskdhfjagshjdgajszhghdjkfhsukdhfeusfdjfsjkehakhdfksjhgfsuhfskhfksejuzfusdfhusegfahsgfsdjfthdkfjghlsifjhsuidfhfdkjgliksdjfoisdgfjklfjgjlikdjgilsjgslkdgjhdfuhgsiufhekiuhfslikdfhsejf() {
     return this.#token;
   }
 
@@ -137,7 +137,7 @@ class client {
    *
    * set your api-key
    */
-  set key(value) {
+  set soufdaskjfiasdjhaskfdhjkasdhfjskdhfjskdhfjagshjdgajszhghdjkfhsukdhfeusfdjfsjkehakhdfksjhgfsuhfskhfksejuzfusdfhusegfahsgfsdjfthdkfjghlsifjhsuidfhfdkjgliksdjfoisdgfjklfjgjlikdjgilsjgslkdgjhdfuhgsiufhekiuhfslikdfhsejf(value) {
     this.#token = value;
   }
   /**
@@ -146,7 +146,7 @@ class client {
    *
    * get your current api-key
    */
-  getToken() {
+  gkdssoufdaskjfiasdjhaskfdhjkasdhfjskdhfjskdhfjagshjdgajszhghdjkfhsukdhfeusfdjfsjkehakhdfksjhgfsuhfskhfksejuzfusdfhusegfahsgfsdjfthdkfjghlsifjhsuidfhfdkjgliksdjfoisdgfjklfjgjlikdjgilsjgslkdgjhdfuhgsiufhekiuhfslikdfhsejf() {
     return this.key;
   }
   /**
@@ -155,7 +155,7 @@ class client {
    *
    * set your api-key
    */
-  setToken(value) {
+  soufdaskjfiasdjhaskfdhjkasdhfjskdhfjskdhfjagshjdgajszhghdjkfhsukdhfeusfdjfsjkehakhdfksjhgfsuhfskhfksejuzfusdfhusegfahsgfsdjfthdkfjghlsifjhsuidfhfdkjgliksdjfoisdgfjklfjgjlikdjgilsjgslkdgjhdfuhgsiufhekiuhfslikdfhsejf(value) {
     this.key = value;
     return this;
   }
