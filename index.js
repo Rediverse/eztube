@@ -127,7 +127,7 @@ class client {
    *
    * get your current api-key
    */
-  get soufdaskjfiasdjhaskfdhjkasdhfjskdhfjskdhfjagshjdgajszhghdjkfhsukdhfeusfdjfsjkehakhdfksjhgfsuhfskhfksejuzfusdfhusegfahsgfsdjfthdkfjghlsifjhsuidfhfdkjgliksdjfoisdgfjklfjgjlikdjgilsjgslkdgjhdfuhgsiufhekiuhfslikdfhsejf() {
+  get key() {
     return this.#token;
   }
 
@@ -137,7 +137,7 @@ class client {
    *
    * set your api-key
    */
-  set soufdaskjfiasdjhaskfdhjkasdhfjskdhfjskdhfjagshjdgajszhghdjkfhsukdhfeusfdjfsjkehakhdfksjhgfsuhfskhfksejuzfusdfhusegfahsgfsdjfthdkfjghlsifjhsuidfhfdkjgliksdjfoisdgfjklfjgjlikdjgilsjgslkdgjhdfuhgsiufhekiuhfslikdfhsejf(value) {
+  set key(value) {
     this.#token = value;
   }
   /**
@@ -146,7 +146,7 @@ class client {
    *
    * get your current api-key
    */
-  gkdssoufdaskjfiasdjhaskfdhjkasdhfjskdhfjskdhfjagshjdgajszhghdjkfhsukdhfeusfdjfsjkehakhdfksjhgfsuhfskhfksejuzfusdfhusegfahsgfsdjfthdkfjghlsifjhsuidfhfdkjgliksdjfoisdgfjklfjgjlikdjgilsjgslkdgjhdfuhgsiufhekiuhfslikdfhsejf() {
+  getKey() {
     return this.key;
   }
   /**
@@ -155,7 +155,7 @@ class client {
    *
    * set your api-key
    */
-  soufdaskjfiasdjhaskfdhjkasdhfjskdhfjskdhfjagshjdgajszhghdjkfhsukdhfeusfdjfsjkehakhdfksjhgfsuhfskhfksejuzfusdfhusegfahsgfsdjfthdkfjghlsifjhsuidfhfdkjgliksdjfoisdgfjklfjgjlikdjgilsjgslkdgjhdfuhgsiufhekiuhfslikdfhsejf(value) {
+  setKey(value) {
     this.key = value;
     return this;
   }
